@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+:root {
+  --background-color: #e0e5ec;
+  --foreground-color: #252525;
+  --upper-box-shadow-foreground: #fff;
+  --lower-box-shadow-foreground: #a3b1c6;
+  
+  --upper-box-shadow-background: #000;
+  --lower-box-shadow-background: #3A3A3A;
+
+  --font-color-foreground: #757575;
+  --font-color-background: rgb(180, 178, 178);
+
+  --svg-color-foreground: #a3b1c6;
+  --svg-color-background: rgb(180, 178, 178);
+
+  --title-color-foreground: #4d4d4d;
+  --title-color-background: rgba(255, 255, 255, 0.817);
+}
+
+.light-theme {
+  --background-color: #e0e5ec;
+  --foreground-color: #1A1A1A;
+  --upper-box-shadow-foreground: #fff;
+  --lower-box-shadow-foreground: #a3b1c6;
+  
+  --upper-box-shadow-background: #000;
+  --lower-box-shadow-background: #3A3A3A;
+
+  --font-color-foreground: #757575;
+  --font-color-background: rgb(180, 178, 178);
+
+  --svg-color-foreground: #a3b1c6;
+  --svg-color-background: rgb(180, 178, 178);
+
+  --title-color-foreground: #4d4d4d;
+  --title-color-background: rgba(255, 255, 255, 0.817);
+}
+
+.dark-theme {
+  --foreground-color: #e0e5ec;
+  --background-color: #252525;
+
+  --upper-box-shadow-foreground: #3A3A3A;
+  --lower-box-shadow-foreground: #000;
+
+  --upper-box-shadow-background: #fff;
+  --lower-box-shadow-background: #a3b1c6;
+
+  --font-color-background: #757575;
+  --font-color-foreground: rgb(180, 178, 178);
+
+  --svg-color-background: #a3b1c6;
+  --svg-color-foreground: rgb(180, 178, 178);
+
+  --title-color-background: #4d4d4d;
+  --title-color-foreground: rgba(255, 255, 255, 0.817);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--font-color-foreground);
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+body {
+  background-color: var(--background-color);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: .8em;
+  height: .5em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+  border-radius: 20px;
+  margin-block: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 149, 255);
+  border-radius: 20px;
+  border: 4px solid var(--background-color);
+}
+
+::selection {
+  color: #fff;
+  background-color: rgb(0, 149, 255);
+}
+
+::placeholder {
+  color: var(--font-color-foreground);
+}

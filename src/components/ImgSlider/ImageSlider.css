@@ -1,0 +1,155 @@
+.imageSlider button svg {
+    fill: var(--font-color-foreground);
+    margin-left: .2em;
+    transition: .2s;
+}
+
+.imageSlider .previous_btn {
+    position: absolute;
+    margin-top: 186px;
+    left: 2em;
+    height: 3em;
+    width: 3em;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .2s;
+}
+
+.imageSlider .previous_btn:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.imageSlider .previous_btn svg {
+    margin-left: -.2em;
+    transform: rotate(180deg);
+}
+
+.imageSlider .next_btn {
+    position: absolute;
+    margin-top: 186px;
+    right: 2em;
+    height: 3em;
+    width: 3em;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .2s;
+}
+
+.imageSlider .next_btn:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.imageSlider button:active svg {
+    fill: rgb(0, 149, 255);
+}
+
+.imageSlider .slider {
+    margin: 0 auto;
+    max-width: 1020px;
+    z-index: 0;
+}
+
+.imageSlider .slide_viewer {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.imageSlider .slide_group {
+    position: relative;
+    width: 100%;
+    /* min-height: 92.6px; */
+    min-height: auto;
+    z-index: 0;
+}
+
+.imageSlider .slide {
+    display: none;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.imageSlider .slide img {
+    width: 100%;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.imageSlider .slide:first-child {
+    display: block;
+}
+
+.imageSlider .slide_buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    z-index: 2;
+    border-radius: 10px;
+    margin-top: -2em;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.imageSlider div.slide_btn {
+    width: .8em;
+    height: .8em;
+    margin: 0 0.185em;
+    background-color: #474544;
+    border-radius: 10px;
+    border: 1px solid var(--upper-box-shadow-foreground);
+    transition: .2s;
+}
+
+.imageSlider .slide_btn.active, .slide_btn:hover {
+    background-color: rgb(0, 149, 255);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 620px) {
+    .imageSlider div.slide_btn {
+    width: .5em;
+    height: .5em;
+    }
+
+    .imageSlider .slide_buttons {
+    margin-top: -.8em;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .imageSlider .previous_btn,
+    .imageSlider .next_btn {
+        width: 2em;
+        height: 2em;
+    }
+
+    .imageSlider button svg {
+        width: 15px;
+        height: 15px;
+        margin: 0;
+    }
+}

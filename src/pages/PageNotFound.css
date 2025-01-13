@@ -1,0 +1,26 @@
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 95vh;
+}
+
+.num {
+    color: rgb(0, 149, 255);
+}
+
+.error {
+    font-size: 3em;
+    display: flex;
+    gap: .2em;
+}
+
+.pagenotfound {
+    font-size: 1.7em;
+}
+
+p a {
+    color: rgb(0, 149, 255);
+}

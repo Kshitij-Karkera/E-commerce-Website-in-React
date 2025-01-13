@@ -1,0 +1,110 @@
+.footerItems .copyRight {
+    display: flex;
+}
+
+.footerItems .copyRight svg {
+    fill: var(--font-color-foreground);
+    margin-right: 5px;
+    transition: .5s;
+}
+
+.footerItems .copyRight svg:hover {
+    fill: rgb(0, 149, 255);
+}
+
+.footerItems .socialLinks {
+    display: flex;
+    position: absolute;
+    right: 1.2em;
+    height: 4.5em;
+    padding: 1em;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+    gap: 1em;
+    transition: .5s;
+}
+
+.footerItems .socialLinks button {
+    outline: none;
+    background-color: var(--background-color);
+    border: none;
+    padding: .5em;
+    border-radius: 10px;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.footerItems .socialLinks button:nth-child(1) svg stop{
+    stop-color: var(--font-color-foreground);
+    transition: .5s;
+}
+
+.footerItems .socialLinks button:nth-child(2) svg {
+    fill: var(--font-color-foreground);
+    transition: .5s;
+}
+
+.footerItems .socialLinks button:nth-child(2):hover svg {
+    fill: rgb(29,161,242);
+}
+
+.footerItems .socialLinks button:nth-child(3) svg {
+    fill: var(--font-color-foreground);
+    transition: .5s;
+}
+
+.footerItems .socialLinks button:nth-child(3):hover svg {
+    fill: rgb(60,90,153);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(1) {
+    stop-color: rgb(255,214,0);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(2) {
+    stop-color: rgb(255,1,0);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(3) {
+    stop-color: rgb(216,0,185);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(4) {
+    stop-color: rgb(255,100,0);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(5) {
+    stop-color: rgb(255,1,0);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(6) {
+    stop-color: rgb(253,0,86);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(7) {
+    stop-color: rgb(243,0,114);
+}
+
+.footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(8) {
+    stop-color: rgb(229,0,151);
+}
+
+.footerItems .socialLinks button:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+@media only screen and (max-width: 620px) {
+    .footerItems .socialLinks {
+      flex-direction: column;
+      height: 12em;
+    }
+}

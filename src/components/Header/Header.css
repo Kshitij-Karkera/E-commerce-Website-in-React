@@ -1,0 +1,492 @@
+#theme-toggle {
+    position: absolute;
+    right: 25em;
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    fill: var(--font-color-foreground);
+    padding: .5em;
+    border-radius: 50%;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    isolation: isolate;
+    transition: .5s;
+}
+
+#theme-toggle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transform: scale(0);
+}
+
+.light-theme #theme-toggle::before {
+    animation: pulse .5s ease-out;
+}
+
+.dark-theme #theme-toggle::before {
+    animation: pulse .5s ease-out;
+}
+
+#theme-toggle::after {
+    content: attr(aria-label);
+    position: absolute;
+    color: var(--foreground-color);
+    background-color: var(--background-color);
+    width: max-content;
+    right: -4.5em;
+    margin: 0 auto;
+    top: 135%;
+    z-index: 100;
+    padding: .5em;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .2s ease-out;
+}
+
+#theme-toggle:hover {
+    fill: rgb(0, 149, 255);
+    background: rgba(0, 0, 0, 0.233);
+}
+
+#theme-toggle:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.toggle-circle {
+    transform: translateX(-15%);
+    transition: .5s ease-out;
+}
+
+.dark-theme .toggle-circle {
+    transform: translateX(0%);
+}
+
+.toggle-sun {
+    transform-origin: center;
+    transition: .75s cubic-bezier(0.11, 0.14, 0.29, 1.32);
+}
+
+.dark-theme .toggle-sun {
+    transform: rotate(.5turn);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: .5;
+    }
+    10% {
+        transform: scale(1);
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.headerContainer {
+    display: flex;
+    position: sticky;
+    flex-direction: row;
+    height: 6em;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1em;
+    width: 100%;
+    z-index: 11;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .5s;
+}
+
+.header svg {
+    scale: 1.3;
+    margin-left: 1.5em;
+    fill: var(--foreground-color);
+}
+
+.headerItems .cartButton {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    background-color: var(--background-color);
+    right: 13em;
+    width: 10.5em;
+    height: 5em;
+    padding: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.headerItems .cartButton .text {
+    display: flex;
+    font-size: 1em;
+    flex-direction: column;
+}
+
+.headerItems .cartButton .text .subText2 {
+    color: rgb(0, 149, 255);
+    font-size: 2em;
+}
+
+.headerItems .cartButton svg {
+    fill: var(--font-color-foreground);
+    width: 5em;
+    height: 5em;
+    margin-left: 10px;
+    transition: .2s;
+}
+
+.headerItems .cartButton:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.headerItems .cartButton:active svg {
+    fill: rgb(0, 149, 255);
+}
+
+.headerItems .profileButton,
+.headerItems .loginButton {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    background-color: var(--background-color);
+    right: 1.5em;
+    width: 10.5em;
+    height: 5em;
+    padding: .5em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.headerItems .linkLoginBtn,
+.headerItems .linkCartBtn {
+    margin-top: -4.2em;
+    text-decoration: none;
+}
+
+.headerItems .profileButton:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.headerItems .loginButton:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 15px rgb(0, 112, 192) inset,
+                3px 3px 15px rgb(0, 112, 192) inset;
+}
+
+.headerItems .loginButton:hover, .headerItems .loginButton:hover .text{
+    background-color: rgb(0, 149, 255);
+    color: var(--upper-box-shadow-foreground);
+    transition: .2s;
+}
+
+.greetUser {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.userName {
+    display: flex;
+    align-items: flex-start;
+    padding: 0;
+    color: rgb(0, 149, 255);
+}
+
+.profileSettings {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profileSettings svg {
+    fill: var(--font-color-foreground);
+    margin-left: 5px;
+    margin-top: 2px;
+    transition: .2s;
+}
+
+.headerItems .loginButton svg {
+    fill: var(--font-color-foreground);
+}
+
+.headerItems .profileButton:focus > .profileSettings svg {
+    fill: rgb(0, 149, 255);
+    transform: rotate(180deg);
+}
+
+.headerItems .loginButton:hover svg {
+    fill: var(--upper-box-shadow-foreground);
+}
+
+.headerItems .profileButton svg:nth-child(3) {
+    fill: var(--svg-color-foreground);
+    display: none;
+    transition: .5s;
+    margin-left: 2px;
+}
+
+.headerItems .profileButton:focus > svg {
+    fill: rgb(0, 149, 255);
+}
+
+.profileSubCategories {
+    display: flex;
+    position: absolute;
+    right: -20em;
+    width: max-content;
+    top: 6em;
+    height: 1em;
+    flex-direction: column;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .5s;
+    transition-delay: .5s, 1s;
+    transition-property: height, right;
+}
+
+.profileSubCategories .greetUser {
+    display: none;
+}
+
+.profileSubCategories a {
+    text-decoration: none;
+}
+
+.profileSubCategories div {
+    text-align: left;
+    padding: 1em;
+    border-radius: 10px;
+    opacity: 0;
+    transition: .4s .3s opacity;
+}
+
+.profileSubCategories hr {
+    background-color: var(--font-color-foreground);
+    width: 90%;
+    height: 3px;
+    opacity: 0;
+    transition: .4s .3s opacity;
+}
+
+.profileSubCategories div:hover {
+    color: rgb(0, 149, 255);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground),
+                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+    transition-duration: .5s, .5s;
+    transition-property: color, box-shadow;
+}
+
+.headerItems .profileButton:focus > .profileSubCategories {
+    right: 0em;
+    height: 23.5em;
+    transition-delay: .5s, 1s;
+    transition-property: right, height;
+}
+
+.headerItems .profileButton:focus > .profileSubCategories div {
+    transition: .4s 1.5s opacity;
+    opacity: 1;
+}
+
+.headerItems .profileButton:focus > .profileSubCategories hr {
+    transition: .4s 1.5s opacity;
+    opacity: 1;
+}
+
+@media only screen and (max-width: 1090px) {
+    .headerContainer {
+        height: 10em;
+        flex-direction: column;
+    }
+
+    .header svg {
+        margin-left: 0em;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    #theme-toggle {
+        top: 1.5em;
+        right: 1.5em;
+    }
+
+    #theme-toggle::after {
+        right: 0em;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .headerContainer {
+        height: 9em;
+    }
+
+    .headerItems .profileButton,
+    .headerItems .loginButton {
+        width: 4em;
+        height: 4em;
+        border-radius: 50px;
+        padding: 0;
+    }
+
+    .headerItems .linkLoginBtn,
+    .headerItems .linkCartBtn {
+        margin-top: -3.4em;
+    }
+
+    .headerItems .profileButton svg:nth-child(3){
+        display: block;
+    }
+
+    .greetUser,
+    .profileSettings {
+        display: none;
+    }
+
+    .profileSubCategories {
+        top: 6em;
+        width: max-content;
+        right: -48em;
+    }
+
+    .headerItems .profileButton:focus > .profileSubCategories {
+        right: -1.4em;
+        height: 27.3em;
+    }
+
+    .profileSubCategories .greetUser {
+        display: flex;
+        padding: .5em;
+        padding-bottom: 0;
+        font-size: 2em;
+        opacity: 0;
+        transition: .4s .3s opacity;
+    }
+
+    .profileSubCategories .greetUser .userName {
+        padding: 0;
+    }
+
+    .headerItems .profileButton:focus > .profileSubCategories .greetUser {
+        transition: .4s 1.5s opacity;
+        opacity: 1;
+    }
+
+    .headerItems .cartButton {
+        width: 4em;
+        height: 4em;
+        border-radius: 50%;
+        padding: 0;
+        right: 7em;
+    }
+
+    .headerItems .cartButton .text {
+        display: none;
+    }
+
+    .headerItems .cartButton svg {
+        fill: var(--svg-color-foreground);
+        width: 4em;
+        height: 4em;
+        margin-top: 3px;
+        margin-left: 0px;
+    }
+
+    .headerItems .loginButton svg {
+        fill: var(--svg-color-foreground);
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    #theme-toggle::after {
+        font-size: .7em;
+    }
+
+    #theme-toggle {
+        top: 1em;
+        right: .5em;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .headerItems .profileButton,
+    .headerItems .loginButton  {
+        width: 3em;
+        height: 3em;
+    }
+
+    .headerItems .linkLoginBtn,
+    .headerItems .linkCartBtn {
+        margin-top: -2.5em;
+    }
+
+    .headerItems .profileButton svg {
+        position: absolute;
+        width: 3em;
+        height: 3em;
+        right: 0em;
+    }
+
+    .headerItems .cartButton {
+        width: 3em;
+        height: 3em;
+        right: 5.5em;
+    }
+
+    .headerItems .cartButton svg {
+        width: 3em;
+        height: 3em;
+    }
+
+    .profileSubCategories {
+        width: 94vw;
+        top: 5.6em;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    .profileSubCategories {
+        width: 93vw;
+    }
+}

@@ -1,0 +1,277 @@
+:root {
+    --valid: lime;
+    --focus: yellow;
+    --invalid: red;
+}
+
+input {
+    border: 3px solid var(--color, transparent);
+}
+
+.forms_container:has(:invalid:not(:focus)) {
+    animation: shake .7s ease;
+}
+
+.forms_container:has(:valid:focus),
+.forms_container:has(:valid) {
+    --color: var(--valid);
+}
+
+.forms_container:has(:invalid) {
+    --color: var(--invalid);
+}
+
+.forms_container:has(:focus) {
+    --color: var(--focus);
+}
+
+.forms_container:has(:placeholder-shown) {
+    --color: transparent;
+}
+
+.forms_container:has(:placeholder-shown:not(:focus)) {
+    animation: none;
+}
+
+.forms_subContainer:has(:invalid:not(:focus)) {
+    animation: shake .7s ease;
+}
+
+.forms_subContainer:has(:valid:focus),
+.forms_subContainer:has(:valid) {
+    --color: var(--valid);
+}
+
+.forms_subContainer:has(:invalid) {
+    --color: var(--invalid);
+}
+
+.forms_subContainer:has(:focus) {
+    --color: var(--focus);
+}
+
+.forms_subContainer:has(:placeholder-shown) {
+    --color: transparent;
+}
+
+.forms_subContainer:has(:placeholder-shown:not(:focus)) {
+    animation: none;
+}
+
+form:valid .submitButton {
+    --foreground-color: rgb(0, 149, 255);
+    color: var(--upper-box-shadow-foreground);
+}
+
+form:valid .submitButton:hover {
+    box-shadow: 1px 1px 10px rgb(0, 95, 162) inset,
+                -1px -1px 10px rgb(0, 95, 162) inset;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20%, 40%, 60%, 80% {
+        transform: translateX(-2%);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(2%);
+    }
+}
+
+.yourAccountContainer {
+    display: flex;
+    margin-top: 1em;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 2em 3em;
+    width: 100%;
+    z-index: 11;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+    transition: .5s;
+}
+
+.passwordValueContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.passwordValueContainer .userDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+}
+
+.yourAccountContainer h2 {
+    margin-top: 0;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.subDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2em 3em;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .5s;
+}
+
+.userDetailsContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userDetails {
+    color: rgb(0, 149, 255);
+    margin-right: 1em;
+}
+
+.editDetails {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    max-width: max-content;
+    margin-left: 1em;
+    padding: 1em 2em;
+    border-radius: 5px;
+    background-color: rgb(0, 149, 255);
+    color: var(--upper-box-shadow-foreground);
+    transition: .1s;
+}
+
+.editDetails:active {
+    box-shadow: 5px 5px 5px rgb(0, 87, 150) inset,
+                -5px -5px 5px rgb(0, 87, 150) inset;
+}
+
+.functions {
+    display: flex;
+}
+
+.inputField {
+    max-width: 20em;
+    min-width: 15em;
+    height: 3em;
+    text-align: left;
+    outline: none;
+    border-radius: 3em;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+    color: rgb(0, 149, 255);
+    padding: 0 1.5em;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.subDetails .submitButton {
+    background-color: var(--foreground-color);
+    color: var(--upper-box-shadow-foreground);
+    border: 0;
+    border-radius: 5px;
+    padding: 1em 2em;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: 0.2s ease-in-out;
+}
+
+.form {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+}
+
+.forms_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1em;
+    gap: 1em;
+}
+
+.userDetailsWithNote {
+    display: flex;
+    gap: .3em;
+    flex-direction: column;
+}
+
+.Note {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: .7em;
+    gap: .5em;
+}
+
+.Note svg {
+    fill: var(--foreground-color);
+}
+
+@media screen and (max-width: 1360px) {
+    .subDetails {
+        flex-direction: column;
+    }
+
+    .userDetailsContainer:nth-child(1),
+    .userDetailsContainer:nth-child(2) {
+        margin-bottom: 1em;
+    }
+
+    .editDetails,
+    .form {
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 1090px) {
+    .form {
+        flex-direction: column;
+    }
+
+    .functions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .editDetails {
+        margin: 0;
+        margin-top: 1em;
+    }
+
+    .submitButton {
+        margin: 0;
+    }
+
+    .forms_container {
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 845px) {
+    .forms_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .yourAccountContainer {
+        padding: 1em;
+    }
+}

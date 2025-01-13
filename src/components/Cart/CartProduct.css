@@ -1,0 +1,108 @@
+.cartproductContainer {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    width: 100%;
+}
+
+.productCartInfo {
+    display: flex;
+    margin-left: 1em;
+    width: 100%;
+    gap: .5em;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.productCartInfo a {
+    text-decoration: none;
+}
+
+.productCartImg {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20em;
+}
+
+.productCartImg img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: drop-shadow(0 0 5px #e0e5ec);
+}
+
+.productPrice {
+    display: flex;
+    flex-direction: row;
+}
+
+.productRating {
+    display: flex;
+    flex-direction: row;
+    height: 2em;
+    align-items: center;
+}
+
+.noOfItems {
+    display: flex;
+    flex-direction: row;
+    padding: .5em;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+}
+
+.deleteProductinCart {
+    display: none;
+}
+
+.noOfItems button {
+    border: none;
+    outline: none;
+    background-color: var(--background-color);
+    padding: .5em;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.noOfItems button:active {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.noOfItems button svg {
+    fill: var(--font-color-foreground);
+}
+
+.noOfItems button:active > svg {
+    fill: rgb(0, 149, 255);
+}
+
+input[type='number'] {
+    outline: none;
+    border: none;
+    width: 3em;
+    color: rgb(0, 149, 255);
+    border-radius: 10px;
+    background-color: var(--background-color);
+    padding: 0 .5em;
+    font-size: 1em;
+    transition: .2s;
+}
+
+input[type='number']:focus {
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

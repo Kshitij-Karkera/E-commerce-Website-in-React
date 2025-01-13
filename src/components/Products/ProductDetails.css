@@ -1,0 +1,130 @@
+.productDetailsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    width: 100%;
+    margin-top: 1em;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    transition: .2s;
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+}
+
+.productDetailsImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40em;
+    height: 20em;
+}
+
+.productDetailsImgContainer img {
+    max-width: 100%;
+    max-height: 100%;
+    filter: drop-shadow(0 0 5px #e0e5ec);
+}
+
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2em 1em;
+    gap: 1em;    
+}
+
+.productDetailsTitle {
+    font-size: 2.5em;
+}
+
+.productDetailsPrice {
+    display: flex;
+    flex-direction: row;
+    font-size: 2em;
+}
+.productDetailsPrice .currency {
+    color: rgb(0, 149, 255)
+}
+
+.productDetailsPrice .price {
+    margin-left: 5px;
+    color: rgb(0, 149, 255)
+}
+
+.productFunctions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    gap: 1em;
+    height: 15em;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+}
+
+.productFunctions .noOfItemsProduct {
+    width: 12.5em;
+}
+
+.productDetailsFunction {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.productRating {
+    gap: .1em;
+}
+
+.buyNow {
+    display: flex;
+    justify-content: center;
+    border: none;
+    outline: none;
+    color: rgb(0, 149, 255);
+    height: 3em;
+    width: 15em;
+    padding: 12px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+                3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: .2s;
+}
+
+.buyNow:active {
+    background-color: rgb(0, 149, 255);
+    color: var(--upper-box-shadow-foreground);
+    box-shadow: -3px -3px 5px rgb(68, 177, 255) inset,
+                3px 3px 5px rgb(0, 109, 187) inset;
+}
+
+.moreLikeThisTitle {
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-left: .5em;
+}
+
+@media only screen and (max-width: 1090px) {
+    .productDetailsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .productFunctions {
+        width: 100%;
+        margin-top: 1em;
+        margin-left: 1em;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .productDetailsFunction {
+        flex-direction: column;
+    }
+}
