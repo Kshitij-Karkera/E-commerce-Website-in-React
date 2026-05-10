@@ -1,8 +1,15 @@
 # E-commerce Website in React
 An advanced E-commerce website built using React.js! This project showcases a fully responsive UI, dynamic product listings, user authentication, and seamless cart management. Ideal for developers seeking inspiration or a starting point for their own e-commerce projects. Explore now!
 
+## Live Demo
+
+[View Live Project](https://epicstor-ecom-project.web.app/)
+
 ## Run React App
 
+```bash
+  npm install
+```
 ```bash
   npm start
 ```
