@@ -61,7 +61,6 @@
     opacity: 0;
     top: 2.2em;
     right: 40%;
-    min-height: max-content;
     max-height: 15em;
     width: 25em;
     padding: 1em 1.5em;
@@ -86,6 +85,7 @@
 }
 
 .searchCategories {
+    margin-top: 1em;
     font-size: .7em;
     color: rgb(0, 149, 255);
     margin-bottom: 5px;
@@ -112,6 +112,8 @@
 }
 
 .suggestions:hover,
+.suggestions.focused,
+.suggestions.focused button,
 .suggestions:hover > button {
     color: rgb(0, 149, 255);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
@@ -264,7 +266,7 @@
     }
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 625px) {
     .headerItems .searchContainer.suggVeryExtraSmallFocusAnimation {
         animation: suggVeryExtraSmallFocusAnimation .5s;
         animation-fill-mode: forwards;

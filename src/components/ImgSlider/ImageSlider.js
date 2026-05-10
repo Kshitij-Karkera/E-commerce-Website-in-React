@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import styled from 'styled-components';
 import samsungBanner from './Samsung_Banner.jpg';
 import redBanner from './Red_Banner.jpg';
 import alexaBanner from './Alexa_Banner.jpg';
+import { PreviousIcon, NextIcon } from '../Icons/Icons';
 import './ImageSlider.css';
 
 const ImageSlider = () => {
@@ -11,33 +11,51 @@ const ImageSlider = () => {
     const slides = [samsungBanner, redBanner, alexaBanner];
     const [isAnimating, setIsAnimating] = useState(false);
     const timeoutRef = useRef(null);
+    const imageLoadCount = useRef(0);
 
-    const handleResize = useCallback(() => {
+    const updateSliderHeight = useCallback(() => {
         const { current: slider } = sliderRef;
-        const slideGroup = slider.querySelector('.slide_group');
-        const activeSlide = slideGroup.querySelector('.slide[style*="display: block"]');
-        if (activeSlide) {
-            slideGroup.style.height = `${activeSlide.clientHeight}px`;
-            const prevButton = slider.querySelector('.previous_btn');
-            const nextButton = slider.querySelector('.next_btn');
-            prevButton.style.marginTop = `${activeSlide.clientHeight / 2 - 20}px`;
-            nextButton.style.marginTop = `${activeSlide.clientHeight / 2 - 20}px`;
+        if (slider) {
+            const slideGroup = slider.querySelector('.slide_group');
+            const activeSlide = slider.querySelector('.slide[style*="display: block"]');
+            if (activeSlide) {
+                const height = activeSlide.clientHeight;
+                slideGroup.style.height = `${height}px`;
+                const prevButton = slider.querySelector('.previous_btn');
+                const nextButton = slider.querySelector('.next_btn');
+                prevButton.style.marginTop = `${height / 2 - 20}px`;
+                nextButton.style.marginTop = `${height / 2 - 20}px`;
+            }
         }
     }, []);
 
+    const handleImageLoad = useCallback(() => {
+        imageLoadCount.current += 1;
+        if (imageLoadCount.current === slides.length) {
+            updateSliderHeight();
+        }
+    }, [slides.length, updateSliderHeight]);
+
     useEffect(() => {
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [handleResize]);
+        // Reset load count on mount
+        imageLoadCount.current = 0;
+
+        // Trigger initial height update after a slight delay to ensure DOM is ready
+        const initialHeightUpdate = setTimeout(() => {
+            updateSliderHeight();
+        }, 0);
+
+        window.addEventListener('resize', updateSliderHeight);
+        return () => {
+            window.removeEventListener('resize', updateSliderHeight);
+            clearTimeout(initialHeightUpdate);
+        };
+    }, [updateSliderHeight]);
 
     useEffect(() => {
         const handleSlideAnimation = () => {
-            if (currentIndex < slides.length - 1) {
-                moveSlide(currentIndex + 1);
-            } else {
-                moveSlide(0);
-            }
+            const newIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+            moveSlide(newIndex);
         };
 
         clearTimeout(timeoutRef.current);
@@ -71,7 +89,7 @@ const ImageSlider = () => {
                 slides[newIndex].style.left = slideLeft;
                 slideGroup.animate(
                     [
-                        { transform: `translateX(0)` },
+                        { transform: 'translateX(0)' },
                         { transform: `translateX(${animateLeft})` },
                     ],
                     {
@@ -84,10 +102,11 @@ const ImageSlider = () => {
                     slideGroup.style.transform = 'translateX(0)';
                     setCurrentIndex(newIndex);
                     setIsAnimating(false);
+                    updateSliderHeight();
                 };
             }
         },
-        [currentIndex, isAnimating]
+        [currentIndex, isAnimating, updateSliderHeight]
     );
 
     const handlePrevClick = useCallback(() => {
@@ -108,7 +127,7 @@ const ImageSlider = () => {
     );
 
     return (
-        <SliderContainer ref={sliderRef} className="imageSlider">
+        <div ref={sliderRef} className="imageSlider">
             <button
                 className="previous_btn"
                 onClick={handlePrevClick}
@@ -116,12 +135,7 @@ const ImageSlider = () => {
                 disabled={isAnimating}
                 style={{ cursor: isAnimating ? 'default' : 'pointer' }}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="25" height="25" viewBox="0 0 256 256">
-                    <g style={{ stroke: 'none', strokeWidth: 0, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                        <path d="M 58.33 58.799 L 15.998 16.466 c -1.059 -1.059 -1.059 -2.776 0 -3.835 L 27.834 0.794 c 1.059 -1.059 2.776 -1.059 3.835 0 l 42.333 42.333 c 1.059 1.059 1.059 2.776 0 3.835 L 62.166 58.799 C 61.107 59.858 59.39 59.858 58.33 58.799 z" style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform=" matrix(1 0 0 1 0 0) " strokeLinecap="round" />
-                        <path d="M 58.33 31.201 L 15.998 73.534 c -1.059 1.059 -1.059 2.776 0 3.835 l 11.837 11.837 c 1.059 1.059 2.776 1.059 3.835 0 l 42.333 -42.333 c 1.059 -1.059 1.059 -2.776 0 -3.835 L 62.166 31.201 C 61.107 30.142 59.39 30.142 58.33 31.201 z" style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform=" matrix(1 0 0 1 0 0) " strokeLinecap="round" />
-                    </g>
-                </svg>
+                <PreviousIcon />
             </button>
 
             <button
@@ -131,13 +145,7 @@ const ImageSlider = () => {
                 disabled={isAnimating}
                 style={{ cursor: isAnimating ? 'default' : 'pointer' }}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="25" height="25" viewBox="0 0 256 256">
-
-                    <g style={{ stroke: 'none', strokeWidth: 0, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
-                        <path d="M 58.33 58.799 L 15.998 16.466 c -1.059 -1.059 -1.059 -2.776 0 -3.835 L 27.834 0.794 c 1.059 -1.059 2.776 -1.059 3.835 0 l 42.333 42.333 c 1.059 1.059 1.059 2.776 0 3.835 L 62.166 58.799 C 61.107 59.858 59.39 59.858 58.33 58.799 z" style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform=" matrix(1 0 0 1 0 0) " strokeLinecap="round" />
-                        <path d="M 58.33 31.201 L 15.998 73.534 c -1.059 1.059 -1.059 2.776 0 3.835 l 11.837 11.837 c 1.059 1.059 2.776 1.059 3.835 0 l 42.333 -42.333 c 1.059 -1.059 1.059 -2.776 0 -3.835 L 62.166 31.201 C 61.107 30.142 59.39 30.142 58.33 31.201 z" style={{ stroke: 'none', strokeWidth: 1, strokeDasharray: 'none', strokeLinecap: 'butt', strokeLinejoin: 'miter', strokeMiterlimit: 10, fillRule: 'nonzero', opacity: 1 }} transform=" matrix(1 0 0 1 0 0) " strokeLinecap="round" />
-                    </g>
-                </svg>
+                <NextIcon />
             </button>
 
             <div className="slider">
@@ -152,7 +160,11 @@ const ImageSlider = () => {
                                     left: '0',
                                 }}
                             >
-                                <img src={slide} alt={`Slide ${index + 1}`} />
+                                <img
+                                    src={slide}
+                                    alt={`Slide ${index + 1}`}
+                                    onLoad={handleImageLoad}
+                                />
                             </div>
                         ))}
                     </div>
@@ -169,21 +181,8 @@ const ImageSlider = () => {
                     />
                 ))}
             </div>
-        </SliderContainer>
+        </div>
     );
 };
 
 export default ImageSlider;
-
-const SliderContainer = styled.div`
-margin-top: 1em;
-align-items: center;
-border-radius: 10px;
-padding: 1em;
-max-width: 100%;
-z-index: -1;
-background-color: var(--background-color);
-box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-3px 3px 5px var(--lower-box-shadow-foreground);
-transition: 0.5s;
-`;

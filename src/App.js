@@ -1,83 +1,55 @@
-import Home from './pages/Home';
-import Login from './pages/Login';
-import MyCart from './pages/MyCart';
-import ProductPage from './pages/ProductPage';
-import SearchCategory from './pages/SearchCategory';
-import YourAccount from './pages/YourAccount';
-import PageNotFound from './pages/PageNotFound';
-import ForgotPassword from './pages/ForgotPassword';
-
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { useStateValue } from './StateProvider'
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
-import { auth } from './firebaseHandler'
+import { auth } from './firebaseHandler';
+
+// Lazy load components for better performance
+const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
+const MyCart = lazy(() => import('./pages/MyCart'));
+const ProductPage = lazy(() => import('./pages/ProductPage'));
+const SearchCategory = lazy(() => import('./pages/SearchCategory'));
+const YourAccount = lazy(() => import('./pages/YourAccount'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const Header = lazy(() => import('./components/Header/Header'));
+const Footer = lazy(() => import('./components/Footer/Footer'));
 
 function App() {
+  const [{ productDetails }, dispatch] = useStateValue();
 
-  const [{productDetails}, dispatch] = useStateValue()
-
+  // Authentication effect with cleanup
   useEffect(() => {
-    auth.onAuthStateChanged(authUser => {
-      if(authUser) {
-        dispatch({
-          type: 'SET_USER',
-          user: authUser
-        })
-      } else {
-        dispatch({
-          type: 'SET_USER',
-          user: null
-        })
-        localStorage.removeItem('item')
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
+      dispatch({
+        type: 'SET_USER',
+        user: authUser || null,
+      });
+      if (!authUser) {
+        localStorage.removeItem('item');
       }
-    })
-    // eslint-disable-next-line
-  }, [])
+    });
+    return () => unsubscribe();
+  }, [dispatch]);
 
-  const uniqueCategory = []
-
-  const uniqueProducts = productDetails.filter(element => {
-    const isDuplicate = uniqueCategory.includes(element.category)
-    if (!isDuplicate) {
-      uniqueCategory.push(element.category);
-      return true;
-    }
-    return false;
-  })
- 
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route exact path='/' element={<Home />} />
-        <Route exact path='/login' element={<Login />} />
-        <Route exact path='/login/forgotpassword' element={<ForgotPassword />} />
-        <Route exact path='/cart' element={<MyCart />} />
-        <Route exact path='/youraccount' element={<YourAccount />} />
-        {
-          productDetails.map(product => {
-            let title = '/' + product.title.replaceAll(' ', '%20')
-            return (<Route path={`/${title}`} element={<ProductPage />} /> )
-          })
-        }
-        {
-          uniqueProducts.map(product => {
-            let title = '/' + product.category.replaceAll(' ', '%20')
-            return (<Route path={`/${title}`} element={<SearchCategory />} /> )
-          })
-        }
-        {
-          productDetails.map(product => {
-            let title = '/' + product.brand.brandName.replaceAll(' ', '%20') + '%20' + product.brand.subBrand.replaceAll(' ', '%20')
-            return (<Route path={`/${title}`} element={<SearchCategory />} /> )
-          })
-        }
-        <Route exact path='*' element={<PageNotFound />} /> 
-      </Routes>
-      <Footer />
+      <Suspense fallback={<div>Loading..</div>}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/cart" element={<MyCart />} />
+          <Route path="/youraccount" element={<YourAccount />} />
+          <Route path="/product/:title" element={<ProductPage />} />
+          <Route path="/category/:category" element={<SearchCategory />} />
+          <Route path="/brand/:brandName/:subBrand" element={<SearchCategory />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Footer />
+      </Suspense>
     </Router>
   );
 }

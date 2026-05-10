@@ -1,3 +1,16 @@
+.imageSlider {
+    margin-top: 1em;
+    align-items: center;
+    border-radius: 10px;
+    padding: 1em;
+    max-width: 100%;
+    z-index: -1;
+    background-color: var(--background-color);
+    box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
+        3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: 0.5s;
+}
+
 .imageSlider button svg {
     fill: var(--font-color-foreground);
     margin-left: .2em;
@@ -17,15 +30,15 @@
     z-index: 1;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     transition: .2s;
 }
 
 .imageSlider .previous_btn:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .imageSlider .previous_btn svg {
@@ -46,15 +59,15 @@
     z-index: 1;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     transition: .2s;
 }
 
 .imageSlider .next_btn:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .imageSlider button:active svg {
@@ -77,7 +90,6 @@
 .imageSlider .slide_group {
     position: relative;
     width: 100%;
-    /* min-height: 92.6px; */
     min-height: auto;
     z-index: 0;
 }
@@ -109,7 +121,7 @@
     margin-top: -2em;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     left: 50%;
     transform: translate(-50%);
 }
@@ -124,23 +136,25 @@
     transition: .2s;
 }
 
-.imageSlider .slide_btn.active, .slide_btn:hover {
+.imageSlider .slide_btn.active,
+.slide_btn:hover {
     background-color: rgb(0, 149, 255);
     cursor: pointer;
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 625px) {
     .imageSlider div.slide_btn {
-    width: .5em;
-    height: .5em;
+        width: .5em;
+        height: .5em;
     }
 
     .imageSlider .slide_buttons {
-    margin-top: -.8em;
+        margin-top: -.8em;
     }
 }
 
 @media only screen and (max-width: 320px) {
+
     .imageSlider .previous_btn,
     .imageSlider .next_btn {
         width: 2em;

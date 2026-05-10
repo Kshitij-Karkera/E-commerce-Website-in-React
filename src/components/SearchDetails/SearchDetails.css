@@ -1,4 +1,5 @@
-input, label {
+input,
+label {
     cursor: pointer;
 }
 
@@ -20,7 +21,57 @@ input, label {
     border-radius: 10px;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
+}
+
+@media only screen and (max-width: 1090px) {
+    .searchFilter {
+        position: absolute;
+        top: 3.3em;
+        left: 0;
+        width: 100%;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-100%);
+        pointer-events: none;
+    }
+}
+
+.searchFilter.mobile {
+    position: absolute;
+    top: 5.3em;
+    left: 0;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+}
+
+.searchFilter.desktop {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.searchFilter.mobile.filterFocus {
+    animation: filterFocus 0.75s ease-in-out forwards;
+    pointer-events: auto;
+}
+
+.searchFilter.mobile.filterBlur {
+    animation: filterBlur 0.75s ease-in-out forwards;
+}
+
+.searchFilter.desktop.filterFocus,
+.searchFilter.desktop.filterBlur {
+    animation: none;
+}
+
+.searchFilter.hidden {
+    display: none;
 }
 
 .custom-select {
@@ -37,7 +88,7 @@ select {
     border: 3px solid rgb(0, 149, 255);
     border-radius: 10px;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     appearance: none;
     cursor: pointer;
     transition: .5s;
@@ -57,10 +108,10 @@ select {
 
 select:focus {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
-select:focus ~ .custom-arrow {
+select:focus~.custom-arrow {
     transform: rotate(-180deg);
 }
 
@@ -89,7 +140,6 @@ select:focus ~ .custom-arrow {
     justify-content: center;
 }
 
-
 .brandReviewContainer .brandReviewInput {
     display: flex;
     align-items: center;
@@ -105,11 +155,8 @@ select:focus ~ .custom-arrow {
     appearance: none;
 }
 
-.brandReviewContainer .brandReviewInput input[type='checkbox']:checked + label {
-    filter: 
-        drop-shadow(3px 0px 3px rgb(0, 149, 255))
-        drop-shadow(-3px 0px 3px rgb(0, 149, 255));
-    
+.brandReviewContainer .brandReviewInput input[type='checkbox']:checked+label {
+    filter: drop-shadow(3px 0px 3px rgb(0, 149, 255)) drop-shadow(-3px 0px 3px rgb(0, 149, 255));
 }
 
 .brandReviewContainer .brandReviewInput svg {
@@ -120,11 +167,11 @@ select:focus ~ .custom-arrow {
 .brandReviewContainer .brandReviewInput svg g {
     stroke: none;
     stroke-width: 0;
-    stroke-dasharray: none; 
-    stroke-linecap: butt; 
-    stroke-linejoin: miter; 
-    stroke-miterlimit: 10; 
-    fill-rule: nonzero; 
+    stroke-dasharray: none;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 10;
+    fill-rule: nonzero;
     opacity: 1;
 }
 
@@ -133,20 +180,19 @@ select:focus ~ .custom-arrow {
 }
 
 .brandReviewContainer .brandReviewInput svg g path:first-child {
-    fill: rgb(255,200,80);
-    
+    fill: rgb(255, 200, 80);
 }
 
 .brandReviewContainer .brandReviewInput svg g path:last-child {
-    fill: rgb(255,220,100);
+    fill: rgb(255, 220, 100);
 }
 
 .brandRangeContainer {
     display: flex;
-    width: 20em;
+    width: 100%;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    padding-right: .5em;
 }
 
 .range {
@@ -161,14 +207,14 @@ select:focus ~ .custom-arrow {
 .searchFilterDetails {
     margin-top: 1em;
     width: 100%;
-    height: 29em;
+    height: 28em;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: .5em;
     border-radius: 10px;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     overflow: scroll;
 }
 
@@ -176,18 +222,17 @@ select:focus ~ .custom-arrow {
     margin-bottom: 0;
 }
 
-
 .searchFilterDetails .filterButton {
     display: none;
     right: 1.5em;
     border: none;
     outline: none;
+    margin-top: 1em;
     background-color: var(--background-color);
     padding: 7px;
-    width: max-content;
     border-radius: 10px;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     transition: .5s;
     cursor: pointer;
 }
@@ -202,7 +247,7 @@ select:focus ~ .custom-arrow {
 
 .searchFilterDetails .filterButton:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .searchFilterDetails .filterButton svg {
@@ -214,21 +259,10 @@ select:focus ~ .custom-arrow {
     fill: rgb(0, 149, 255);
 }
 
-.searchFilter.filterFocus {
-    -webkit-animation: filterFocus 1s forwards;
-            animation: filterFocus 1s forwards;
-}
-
-.searchFilter.filterBlur {
-    -webkit-animation: filterBlur 1s forwards;
-            animation: filterBlur 1s forwards;
-}
-
 .searchProductContainer {
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: center;
     background-color: var(--background-color);
     margin-bottom: 1em;
     padding: 1em;
@@ -238,7 +272,7 @@ select:focus ~ .custom-arrow {
     cursor: pointer;
     overflow: hidden;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .searchProductContainer .featured {
@@ -257,7 +291,6 @@ select:focus ~ .custom-arrow {
     align-items: center;
     justify-content: center;
     font-size: .5em;
-    margin-left: 1.5em;
     padding: .5em;
     width: max-content;
     color: rgb(0, 149, 255);
@@ -269,7 +302,7 @@ select:focus ~ .custom-arrow {
     align-items: center;
     justify-content: center;
     margin-left: 1em;
-    width: 15em;
+    min-width: 15em;
     height: 10em;
 }
 
@@ -283,17 +316,35 @@ select:focus ~ .custom-arrow {
     margin-left: 1em;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     padding: 0;
-    gap: .3em;
 }
 
 .productDetails .productTitle {
+    text-align: left;
+    margin-top: 0;
     font-size: 1.6em;
 }
 
+.productDetails .productDesc {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1em;
+}
+
 .productDetails .productPrice {
+    display: flex;
+    gap: .5em;
     font-size: 1.3em;
     color: rgb(0, 149, 255);
+}
+
+.productDetails .productRating {
+    display: flex;
+    align-items: center;
+    gap: .2em;
+    justify-content: flex-start;
 }
 
 .searchFilterDetails a {
@@ -301,76 +352,42 @@ select:focus ~ .custom-arrow {
 }
 
 .searchProductContainer p svg g path:first-child {
-    fill: rgb(255,200,80);
+    fill: rgb(255, 200, 80);
 }
 
 .searchProductContainer p svg g path:last-child {
-    fill: rgb(255,220,100);
+    fill: rgb(255, 220, 100);
 }
 
-
-@-webkit-keyframes filterFocus {
-    0% {
-        opacity: 0;
-        top: 1em;
-        display: none;
-    }
-
-    100% {
-        opacity: 1;
-        top: 4.5em;
-        display: flex;
-    }
-}
 @keyframes filterFocus {
     0% {
         opacity: 0;
-        top: 1em;
-        display: none;
+        transform: translateY(-100%);
+        visibility: hidden;
     }
 
     100% {
         opacity: 1;
-        top: 4.5em;
-        display: flex;
+        transform: translateY(0);
+        visibility: visible;
     }
 }
 
-@-webkit-keyframes filterBlur {
-    100% {
-        opacity: 1;
-        top: 1em;
-        display: flex;
-    }
-
+@keyframes filterBlur {
     0% {
         opacity: 1;
-        top: 4.5em;
-        display: none;
+        transform: translateY(0);
+        visibility: visible;
     }
-}
-@keyframes filterBlur {
+
     100% {
         opacity: 0;
-        top: 1em;
-        display: flex;
-    }
-
-    0% {
-        opacity: 1;
-        top: 4.5em;
-        display: none;
+        transform: translateY(-100%);
+        visibility: hidden;
     }
 }
 
 @media only screen and (max-width: 1090px) {
-    .searchFilter {
-        position: absolute;
-        top: -100em;
-        opacity: 0;
-        width: 100%;
-    }
-
     .searchFilterDetails {
         height: max-content;
     }
@@ -378,8 +395,32 @@ select:focus ~ .custom-arrow {
     .searchFilterDetails .filterButton {
         display: flex;
     }
+}
 
-    .brandRangeContainer {
+@media only screen and (max-width: 625px) {
+    .searchFilterDetails .searchProductContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .productDetails {
+        gap: .5em;
+    }
+
+    .productRating {
+        margin-bottom: .5em;
+    }
+
+    .productDetails .productTitle {
+        margin-top: 1em;
+    }
+
+    .searchProductContainer .imgContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
         width: 100%;
+        height: 15em;
     }
 }

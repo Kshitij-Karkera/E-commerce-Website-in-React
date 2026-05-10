@@ -1,17 +1,16 @@
 #theme-toggle {
     position: absolute;
-    right: 25em;
     cursor: pointer;
     background: 0;
     border: 0;
     fill: var(--font-color-foreground);
-    padding: .5em;
+    padding: 0.5em;
     border-radius: 50%;
     outline: none;
     width: 40px;
     height: 40px;
     isolation: isolate;
-    transition: .5s;
+    transition: 0.5s;
 }
 
 #theme-toggle::before {
@@ -22,12 +21,9 @@
     transform: scale(0);
 }
 
-.light-theme #theme-toggle::before {
-    animation: pulse .5s ease-out;
-}
-
+.light-theme #theme-toggle::before,
 .dark-theme #theme-toggle::before {
-    animation: pulse .5s ease-out;
+    animation: pulse 0.5s ease-out;
 }
 
 #theme-toggle::after {
@@ -40,14 +36,14 @@
     margin: 0 auto;
     top: 135%;
     z-index: 100;
-    padding: .5em;
+    padding: 0.5em;
     border-radius: 10px;
     opacity: 0;
     transform: scale(0);
     transform-origin: top;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
-    transition: .2s ease-out;
+        3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: 0.2s ease-out;
 }
 
 #theme-toggle:hover {
@@ -62,7 +58,7 @@
 
 .toggle-circle {
     transform: translateX(-15%);
-    transition: .5s ease-out;
+    transition: 0.5s ease-out;
 }
 
 .dark-theme .toggle-circle {
@@ -71,24 +67,27 @@
 
 .toggle-sun {
     transform-origin: center;
-    transition: .75s cubic-bezier(0.11, 0.14, 0.29, 1.32);
+    transition: 0.75s cubic-bezier(0.11, 0.14, 0.29, 1.32);
 }
 
 .dark-theme .toggle-sun {
-    transform: rotate(.5turn);
+    transform: rotate(0.5turn);
 }
 
 @keyframes pulse {
     0% {
         transform: scale(0);
-        opacity: .5;
+        opacity: 0.5;
     }
+
     10% {
         transform: scale(1);
     }
+
     75% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
         transform: scale(1);
@@ -107,8 +106,8 @@
     z-index: 11;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
-    transition: .5s;
+        3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: 0.5s;
 }
 
 .header svg {
@@ -125,22 +124,15 @@
     align-items: center;
     outline: none;
     background-color: var(--background-color);
-    right: 13em;
     width: 10.5em;
     height: 5em;
     padding: 1em;
     border: none;
     border-radius: 10px;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     cursor: pointer;
-    transition: .2s;
-}
-
-.headerItems .cartButton .text {
-    display: flex;
-    font-size: 1em;
-    flex-direction: column;
+    transition: 0.2s;
 }
 
 .headerItems .cartButton .text .subText2 {
@@ -153,14 +145,14 @@
     width: 5em;
     height: 5em;
     margin-left: 10px;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .headerItems .cartButton:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .headerItems .cartButton:active svg {
@@ -176,16 +168,15 @@
     align-items: center;
     outline: none;
     background-color: var(--background-color);
-    right: 1.5em;
     width: 10.5em;
     height: 5em;
-    padding: .5em;
+    padding: 0.5em;
     border: none;
     border-radius: 10px;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
+        3px 3px 5px var(--lower-box-shadow-foreground);
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .headerItems .linkLoginBtn,
@@ -196,22 +187,23 @@
 
 .headerItems .profileButton:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
 .headerItems .loginButton:active {
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 15px rgb(0, 112, 192) inset,
-                3px 3px 15px rgb(0, 112, 192) inset;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 15px rgb(0, 112, 192) inset,
+        3px 3px 15px rgb(0, 112, 192) inset;
 }
 
-.headerItems .loginButton:hover, .headerItems .loginButton:hover .text{
+.headerItems .loginButton:hover,
+.headerItems .loginButton:hover .text {
     background-color: rgb(0, 149, 255);
     color: var(--upper-box-shadow-foreground);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .greetUser {
@@ -238,48 +230,47 @@
     fill: var(--font-color-foreground);
     margin-left: 5px;
     margin-top: 2px;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .headerItems .loginButton svg {
-    fill: var(--font-color-foreground);
-}
-
-.headerItems .profileButton:focus > .profileSettings svg {
-    fill: rgb(0, 149, 255);
-    transform: rotate(180deg);
+    z-index: 1;
+    fill: var(--svg-color-foreground);
 }
 
 .headerItems .loginButton:hover svg {
     fill: var(--upper-box-shadow-foreground);
 }
 
+.headerItems .profileButton:focus + .profileSettings svg {
+    fill: rgb(0, 149, 255);
+    transform: rotate(180deg);
+}
+
 .headerItems .profileButton svg:nth-child(3) {
     fill: var(--svg-color-foreground);
     display: none;
-    transition: .5s;
+    transition: 0.5s;
     margin-left: 2px;
 }
 
-.headerItems .profileButton:focus > svg {
+.headerItems .profileButton:focus + svg {
     fill: rgb(0, 149, 255);
 }
 
 .profileSubCategories {
     display: flex;
     position: absolute;
-    right: -20em;
     width: max-content;
     top: 6em;
+    right: -20em;
     height: 1em;
     flex-direction: column;
     background-color: var(--background-color);
     border-radius: 10px;
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground);
-    transition: .5s;
-    transition-delay: .5s, 1s;
-    transition-property: height, right;
+        3px 3px 5px var(--lower-box-shadow-foreground);
+    transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
 }
 
 .profileSubCategories .greetUser {
@@ -295,7 +286,7 @@
     padding: 1em;
     border-radius: 10px;
     opacity: 0;
-    transition: .4s .3s opacity;
+    transition: opacity 0.2s ease-out;
 }
 
 .profileSubCategories hr {
@@ -303,36 +294,32 @@
     width: 90%;
     height: 3px;
     opacity: 0;
-    transition: .4s .3s opacity;
+    transition: opacity 0.2s ease-out;
 }
 
 .profileSubCategories div:hover {
     color: rgb(0, 149, 255);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
-                3px 3px 5px var(--lower-box-shadow-foreground),
-                -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
-    transition-duration: .5s, .5s;
+        3px 3px 5px var(--lower-box-shadow-foreground),
+        -3px -3px 5px var(--upper-box-shadow-foreground) inset,
+        3px 3px 5px var(--lower-box-shadow-foreground) inset;
+    transition-duration: 0.5s, 0.5s;
     transition-property: color, box-shadow;
 }
 
-.headerItems .profileButton:focus > .profileSubCategories {
-    right: 0em;
+.headerItems .profileButton:focus + .profileSubCategories {
     height: 23.5em;
-    transition-delay: .5s, 1s;
-    transition-property: right, height;
+    right: 1em;
+    transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
 }
 
-.headerItems .profileButton:focus > .profileSubCategories div {
-    transition: .4s 1.5s opacity;
+.headerItems .profileButton:focus + .profileSubCategories div,
+.headerItems .profileButton:focus + .profileSubCategories hr {
     opacity: 1;
+    transition: opacity 0.3s ease-out 1s;
 }
 
-.headerItems .profileButton:focus > .profileSubCategories hr {
-    transition: .4s 1.5s opacity;
-    opacity: 1;
-}
-
+/* Responsive Styles */
 @media only screen and (max-width: 1090px) {
     .headerContainer {
         height: 10em;
@@ -340,7 +327,7 @@
     }
 
     .header svg {
-        margin-left: 0em;
+        margin-left: 0;
     }
 }
 
@@ -351,11 +338,34 @@
     }
 
     #theme-toggle::after {
-        right: 0em;
+        right: 0;
+    }
+
+    .headerItems .cartButton {
+        right: 13em;
+    }
+
+    .headerItems .profileButton,
+    .headerItems .loginButton {
+        right: 1.5em;
+    }
+
+    .headerItems .linkLoginBtn .loginButton {
+        display: none;
+    }
+
+    .headerItems .linkLoginBtn:not(.loginPage) .loginButton {
+        display: flex;
     }
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 1090px) {
+    .profileSubCategories {
+        top: 10em
+    }
+}
+
+@media only screen and (max-width: 625px) {
     .headerContainer {
         height: 9em;
     }
@@ -373,7 +383,7 @@
         margin-top: -3.4em;
     }
 
-    .headerItems .profileButton svg:nth-child(3){
+    .headerItems .profileButton svg:nth-child(3) {
         display: block;
     }
 
@@ -383,32 +393,29 @@
     }
 
     .profileSubCategories {
-        top: 6em;
-        width: max-content;
-        right: -48em;
+        width: 100%;
+        right: -50em;
+        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
     }
 
-    .headerItems .profileButton:focus > .profileSubCategories {
-        right: -1.4em;
-        height: 27.3em;
+    .headerItems .profileButton:focus + .profileSubCategories {
+        right: 0;
+        height: 27em;
+        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
     }
 
     .profileSubCategories .greetUser {
         display: flex;
-        padding: .5em;
+        padding: 0.5em;
         padding-bottom: 0;
         font-size: 2em;
         opacity: 0;
-        transition: .4s .3s opacity;
+        transition: opacity 0.2s ease-out;
     }
 
-    .profileSubCategories .greetUser .userName {
-        padding: 0;
-    }
-
-    .headerItems .profileButton:focus > .profileSubCategories .greetUser {
-        transition: .4s 1.5s opacity;
+    .headerItems .profileButton:focus + .profileSubCategories .greetUser {
         opacity: 1;
+        transition: opacity 0.2s ease-out 1s;
     }
 
     .headerItems .cartButton {
@@ -419,39 +426,32 @@
         right: 7em;
     }
 
-    .headerItems .cartButton .text {
-        display: none;
-    }
-
     .headerItems .cartButton svg {
         fill: var(--svg-color-foreground);
         width: 4em;
         height: 4em;
         margin-top: 3px;
-        margin-left: 0px;
-    }
-
-    .headerItems .loginButton svg {
-        fill: var(--svg-color-foreground);
+        margin-left: 0;
     }
 }
 
 @media only screen and (max-width: 410px) {
     #theme-toggle::after {
-        font-size: .7em;
+        font-size: 0.7em;
     }
 
     #theme-toggle {
         top: 1em;
-        right: .5em;
+        right: 0.5em;
         width: 30px;
         height: 30px;
     }
 }
 
 @media only screen and (max-width: 350px) {
+
     .headerItems .profileButton,
-    .headerItems .loginButton  {
+    .headerItems .loginButton {
         width: 3em;
         height: 3em;
     }
@@ -465,7 +465,7 @@
         position: absolute;
         width: 3em;
         height: 3em;
-        right: 0em;
+        right: 0;
     }
 
     .headerItems .cartButton {
@@ -480,13 +480,53 @@
     }
 
     .profileSubCategories {
-        width: 94vw;
-        top: 5.6em;
+        right: -50em;
+        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
+    }
+
+    .headerItems .profileButton:focus + .profileSubCategories {
+        right: 0em;
+        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
     }
 }
 
 @media only screen and (max-width: 280px) {
     .profileSubCategories {
-        width: 93vw;
+        right: -50em;
+        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
+    }
+
+    .headerItems .profileButton:focus + .profileSubCategories {
+        right: 0;
+        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
+    }
+}
+
+/* Hide login button on login page */
+body.loginPage .headerItems .linkLoginBtn .loginButton {
+    display: none;
+}
+
+/* Large screen styles */
+@media only screen and (min-width: 720px) {
+    #theme-toggle {
+        right: 25em;
+    }
+
+    .headerItems .cartButton {
+        right: 13em;
+    }
+
+    .headerItems .profileButton,
+    .headerItems .loginButton {
+        right: 1.5em;
+    }
+
+    body.loginPage .headerItems .cartButton {
+        right: 1.5em;
+    }
+
+    body.loginPage #theme-toggle {
+        right: 14em;
     }
 }

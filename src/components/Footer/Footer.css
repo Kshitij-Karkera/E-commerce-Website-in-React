@@ -45,22 +45,40 @@
     transition: .5s;
 }
 
-.footerItems .socialLinks button:nth-child(2) svg {
+.footerItems .socialLinks button:nth-child(2) svg path:nth-child(1) {
     fill: var(--font-color-foreground);
     transition: .5s;
 }
 
-.footerItems .socialLinks button:nth-child(2):hover svg {
-    fill: rgb(29,161,242);
+.footerItems .socialLinks button:nth-child(2) svg path:nth-child(2) {
+    fill: var(--background-color);
+    transition: .5s;
 }
+
+.footerItems .socialLinks button:nth-child(2):hover svg path:nth-child(1) {
+    fill: rgb(0, 0, 0);
+}
+
+.footerItems .socialLinks button:nth-child(2):hover svg path:nth-child(2) {
+    fill: rgb(255, 255, 255);
+}
+
 
 .footerItems .socialLinks button:nth-child(3) svg {
     fill: var(--font-color-foreground);
     transition: .5s;
 }
 
+.footerItems .socialLinks button:nth-child(3) svg:nth-child(1) path {
+    fill: var(--background-color);
+}
+
 .footerItems .socialLinks button:nth-child(3):hover svg {
     fill: rgb(60,90,153);
+}
+
+.footerItems .socialLinks button:nth-child(3):hover svg:nth-child(1) path {
+    fill: #fff;
 }
 
 .footerItems .socialLinks button:nth-child(1):hover svg stop:nth-child(1) {
@@ -102,7 +120,7 @@
                 3px 3px 5px var(--lower-box-shadow-foreground) inset;
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 625px) {
     .footerItems .socialLinks {
       flex-direction: column;
       height: 12em;
