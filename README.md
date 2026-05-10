@@ -5,6 +5,8 @@ An advanced E-commerce website built using React.js! This project showcases a fu
 
 [View Live Project](https://epicstor-ecom-project.web.app/)
 
+---
+
 ## Run React App
 
 ```bash
