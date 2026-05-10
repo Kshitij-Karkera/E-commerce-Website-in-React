@@ -8,7 +8,7 @@ function ProductPage() {
   const [{ productDetails }] = useStateValue();
 
   if (!productDetails || productDetails.length === 0) {
-    return <Loader label="Fetching product" />;
+    return <Loader />;
   }
 
   const decodedTitle = decodeURIComponent(title);

@@ -6,7 +6,7 @@ function SearchCategory() {
   const [{ productDetails }] = useStateValue();
 
   if (!productDetails || productDetails.length === 0) {
-    return <Loader label="Fetching results" />;
+    return <Loader />;
   }
 
   return <SearchDetails />;

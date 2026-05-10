@@ -39,8 +39,6 @@ function Loader({ label = 'Loading…', fullPage = false }) {
                     <span className="loader-dot" style={{ '--d': '160ms' }} />
                     <span className="loader-dot" style={{ '--d': '320ms' }} />
                 </div>
-
-                <p className="loader-label">{label}</p>
             </div>
         </div>
     );
