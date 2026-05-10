@@ -1,4 +1,4 @@
-# E-commerce Website in React [Live Project](https://epicstor-ecom-project.web.app/)
+# E-commerce Website in React : [Live Demo](https://epicstor-ecom-project.web.app/)
 An advanced E-commerce website built using React.js! This project showcases a fully responsive UI, dynamic product listings, user authentication, and seamless cart management. Ideal for developers seeking inspiration or a starting point for their own e-commerce projects. Explore now!
 
 ## Run React App
