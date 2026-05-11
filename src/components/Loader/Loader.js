@@ -24,8 +24,8 @@ function Loader({ label = 'Loading…', fullPage = false }) {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                         />
-                        <circle cx="19" cy="34" r="2.5" fill="rgb(0,149,255)" className="loader-wheel" />
-                        <circle cx="31" cy="34" r="2.5" fill="rgb(0,149,255)" className="loader-wheel" />
+                        <circle cx="19" cy="34" r="2.5" fill="rgb(0,149,255)" />
+                        <circle cx="31" cy="34" r="2.5" fill="rgb(0,149,255)" />
                     </svg>
                 </div>
 
