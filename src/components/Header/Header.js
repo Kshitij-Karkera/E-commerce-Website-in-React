@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
@@ -10,27 +10,60 @@ import { LogoIcon, CartIcon, ProfileIcon, ThemeToggleIcon, ProfileSettingsIcon }
 function Header() {
   const [{ basket, user }] = useStateValue();
   const navigate = useNavigate();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const location = useLocation();
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const profileBtnRef = useRef(null);
+  const profileMenuRef = useRef(null);
+
+  const isMobile = windowWidth <= 625;
+
+  // ── Window resize ──────────────────────────────────────────
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // ── Close menu on route change ─────────────────────────────
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
+
+  // ── Restore header/footer visibility (hidden by PageNotFound) 
   useEffect(() => {
     const header = document.querySelector('.headerContainer');
     const footer = document.querySelector('.footerItems');
-    if (header && footer) {
-      header.style.display = 'flex';
-      footer.style.display = 'flex';
-    }
-
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    if (header) header.style.display = 'flex';
+    if (footer) footer.style.display = 'flex';
   }, [location]);
 
+  // ── Close mobile menu on outside click/touch ───────────────
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleOutside = (e) => {
+      if (
+        profileBtnRef.current &&
+        profileMenuRef.current &&
+        !profileBtnRef.current.contains(e.target) &&
+        !profileMenuRef.current.contains(e.target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('touchstart', handleOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('touchstart', handleOutside);
+    };
+  }, [isMobile]);
+
+  // ── Theme toggle ───────────────────────────────────────────
   useEffect(() => {
     const themeToggle = document.querySelector('#theme-toggle');
     if (!themeToggle) return;
@@ -50,17 +83,23 @@ function Header() {
     };
 
     const handleThemeToggle = () => {
-      document.body.classList.contains('dark-theme') ? enableLightMode() : enableDarkMode();
+      document.body.classList.contains('dark-theme')
+        ? enableLightMode()
+        : enableDarkMode();
     };
 
     themeToggle.addEventListener('click', handleThemeToggle);
-
     localStorage.getItem('theme') === 'dark' ? enableDarkMode() : enableLightMode();
 
-    return () => {
-      themeToggle.removeEventListener('click', handleThemeToggle);
-    };
+    return () => themeToggle.removeEventListener('click', handleThemeToggle);
   }, []);
+
+  // ── Handlers ───────────────────────────────────────────────
+  const handleProfileClick = () => {
+    if (isMobile) setMenuOpen(prev => !prev);
+  };
+
+  const handleMenuClose = () => setMenuOpen(false);
 
   const signOut = () => {
     if (user) {
@@ -70,18 +109,43 @@ function Header() {
     }
   };
 
+  // ── Mobile dropdown inline styles ──────────────────────────
+  // On desktop this object is empty — CSS :focus rules take over.
+  // On mobile JS owns all visibility so there's no fight with CSS.
+  const mobileDropdownStyle = isMobile
+    ? {
+      right: 0,
+      width: '100%',
+      height: menuOpen ? '27em' : '1em',
+      opacity: menuOpen ? 1 : 0,
+      visibility: menuOpen ? 'visible' : 'hidden',
+      pointerEvents: menuOpen ? 'auto' : 'none',
+      transition: menuOpen
+        ? 'height 0.4s ease, opacity 0.3s ease, visibility 0s'
+        : 'height 0.4s ease, opacity 0.3s ease, visibility 0s 0.4s',
+    }
+    : {};
+
+  // ── Render ─────────────────────────────────────────────────
   return (
     <HeaderContainer className="headerContainer">
+
       <HeaderLogo className="header">
         <Link to="/">
           <LogoIcon />
         </Link>
       </HeaderLogo>
+
       <HeaderItems className="headerItems">
         <SearchBar />
+
+        {/* Cart */}
         <Link to="/cart" className="linkCartBtn">
           <button className="cartButton">
-            <div className="text" style={{ display: windowWidth <= 625 ? 'none' : 'block' }}>
+            <div
+              className="text"
+              style={{ display: isMobile ? 'none' : 'block' }}
+            >
               <div className="subText1">Cart:</div>
               <div className="subText2">{basket?.length}</div>
             </div>
@@ -90,49 +154,99 @@ function Header() {
             </div>
           </button>
         </Link>
+
+        {/* Profile or Login */}
         {user ? (
           <>
-            <button className="profileButton">
+            {/*
+              profileButton and profileSubCategories are kept as direct
+              siblings so the desktop CSS :focus + .profileSubCategories
+              selector continues to work without any wrapper div.
+            */}
+            <button
+              className="profileButton"
+              ref={profileBtnRef}
+              onClick={handleProfileClick}
+            >
               <div className="greetUser">
-                Hello,&nbsp;<span className="userName">{user.displayName ? user.displayName.split(" ")[0] : 'User'}</span>
+                Hello,&nbsp;
+                <span className="userName">
+                  {user.displayName ? user.displayName.split(' ')[0] : 'User'}
+                </span>
               </div>
               <div className="profileSettings">
-                Account & Lists
+                Account &amp; Lists
                 <ProfileSettingsIcon />
               </div>
               <ProfileIcon />
             </button>
-            <div className="profileSubCategories">
+
+            <div
+              className="profileSubCategories"
+              ref={profileMenuRef}
+              style={mobileDropdownStyle}
+            >
               <span className="greetUser">
-                Hello,&nbsp;<span className="userName">{user.displayName ? user.displayName.split(" ")[0] : 'User'}</span>
+                Hello,&nbsp;
+                <span className="userName">
+                  {user.displayName ? user.displayName.split(' ')[0] : 'User'}
+                </span>
               </span>
-              <Link to='/youraccount'><div>Your Account</div></Link>
-              <Link to=''><div>Your Orders</div></Link>
-              <Link to=''><div>Your Wish List</div></Link>
-              <Link to=''><div>Your Recommendations</div></Link>
-              <Link to=''><div>Your Seller Account</div></Link>
+
+              <Link to="/youraccount" onClick={handleMenuClose}>
+                <div>Your Account</div>
+              </Link>
+              <Link to="" onClick={handleMenuClose}>
+                <div>Your Orders</div>
+              </Link>
+              <Link to="" onClick={handleMenuClose}>
+                <div>Your Wish List</div>
+              </Link>
+              <Link to="" onClick={handleMenuClose}>
+                <div>Your Recommendations</div>
+              </Link>
+              <Link to="" onClick={handleMenuClose}>
+                <div>Your Seller Account</div>
+              </Link>
+
               <hr />
-              <Link to=''><div>Switch Account</div></Link>
-              <div onClick={signOut}>Sign Out</div>
+
+              <Link to="" onClick={handleMenuClose}>
+                <div>Switch Account</div>
+              </Link>
+              <div onClick={() => { handleMenuClose(); signOut(); }}>
+                Sign Out
+              </div>
             </div>
           </>
         ) : (
           <Link to="/login" className="linkLoginBtn">
             <button className="loginButton">
               <ProfileIcon />
-              <div className="text" style={{ display: windowWidth <= 625 ? 'none' : 'flex' }}>LOGIN</div>
+              <div
+                className="text"
+                style={{ display: isMobile ? 'none' : 'flex' }}
+              >
+                LOGIN
+              </div>
             </button>
           </Link>
         )}
+
+        {/* Theme toggle */}
         <button id="theme-toggle" aria-label="Switch to Dark Theme">
           <ThemeToggleIcon />
         </button>
       </HeaderItems>
+
     </HeaderContainer>
   );
 }
 
 export default Header;
+
+
+/* ── Styled components (layout only, no overrides) ─────────── */
 
 const HeaderContainer = styled.div``;
 
@@ -140,11 +254,12 @@ const HeaderLogo = styled.div``;
 
 const HeaderItems = styled.div`
   display: flex;
-  @media only screen and (max-width: 1090px) {
-    margin-top: 1em;
-  }
   flex-direction: row;
   height: 6em;
   align-items: center;
   width: 100%;
+
+  @media only screen and (max-width: 1090px) {
+    margin-top: 1em;
+  }
 `;

@@ -1,3 +1,13 @@
+/* ============================================================
+   Header.css
+   Mobile dropdown (≤625px) is controlled entirely by JS
+   inline styles in Header.js — no :focus CSS needed there.
+   Desktop dropdown (>625px) keeps the original :focus CSS.
+   ============================================================ */
+
+
+/* ── Theme toggle ─────────────────────────────────────────── */
+
 #theme-toggle {
     position: absolute;
     cursor: pointer;
@@ -56,24 +66,6 @@
     transform: scale(1);
 }
 
-.toggle-circle {
-    transform: translateX(-15%);
-    transition: 0.5s ease-out;
-}
-
-.dark-theme .toggle-circle {
-    transform: translateX(0%);
-}
-
-.toggle-sun {
-    transform-origin: center;
-    transition: 0.75s cubic-bezier(0.11, 0.14, 0.29, 1.32);
-}
-
-.dark-theme .toggle-sun {
-    transform: rotate(0.5turn);
-}
-
 @keyframes pulse {
     0% {
         transform: scale(0);
@@ -93,6 +85,30 @@
         transform: scale(1);
     }
 }
+
+
+/* ── Theme toggle icon animations ────────────────────────── */
+
+.toggle-circle {
+    transform: translateX(-15%);
+    transition: 0.5s ease-out;
+}
+
+.dark-theme .toggle-circle {
+    transform: translateX(0%);
+}
+
+.toggle-sun {
+    transform-origin: center;
+    transition: 0.75s cubic-bezier(0.11, 0.14, 0.29, 1.32);
+}
+
+.dark-theme .toggle-sun {
+    transform: rotate(0.5turn);
+}
+
+
+/* ── Header container ─────────────────────────────────────── */
 
 .headerContainer {
     display: flex;
@@ -115,6 +131,9 @@
     margin-left: 1.5em;
     fill: var(--foreground-color);
 }
+
+
+/* ── Cart button ──────────────────────────────────────────── */
 
 .headerItems .cartButton {
     position: absolute;
@@ -158,6 +177,9 @@
 .headerItems .cartButton:active svg {
     fill: rgb(0, 149, 255);
 }
+
+
+/* ── Profile / Login buttons ──────────────────────────────── */
 
 .headerItems .profileButton,
 .headerItems .loginButton {
@@ -206,6 +228,18 @@
     transition: 0.2s;
 }
 
+.headerItems .loginButton svg {
+    z-index: 1;
+    fill: var(--svg-color-foreground);
+}
+
+.headerItems .loginButton:hover svg {
+    fill: var(--upper-box-shadow-foreground);
+}
+
+
+/* ── Greeting / profile settings (inside profileButton) ───── */
+
 .greetUser {
     display: flex;
     flex-direction: row;
@@ -233,20 +267,7 @@
     transition: 0.2s;
 }
 
-.headerItems .loginButton svg {
-    z-index: 1;
-    fill: var(--svg-color-foreground);
-}
-
-.headerItems .loginButton:hover svg {
-    fill: var(--upper-box-shadow-foreground);
-}
-
-.headerItems .profileButton:focus + .profileSettings svg {
-    fill: rgb(0, 149, 255);
-    transform: rotate(180deg);
-}
-
+/* Third SVG child (mobile-only icon) hidden by default */
 .headerItems .profileButton svg:nth-child(3) {
     fill: var(--svg-color-foreground);
     display: none;
@@ -254,9 +275,8 @@
     margin-left: 2px;
 }
 
-.headerItems .profileButton:focus + svg {
-    fill: rgb(0, 149, 255);
-}
+
+/* ── Profile dropdown — DESKTOP (:focus driven) ───────────── */
 
 .profileSubCategories {
     display: flex;
@@ -271,6 +291,7 @@
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground),
         3px 3px 5px var(--lower-box-shadow-foreground);
     transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
+    overflow: hidden;
 }
 
 .profileSubCategories .greetUser {
@@ -307,19 +328,61 @@
     transition-property: color, box-shadow;
 }
 
-.headerItems .profileButton:focus + .profileSubCategories {
+/* Desktop: open on :focus */
+.headerItems .profileButton:focus+.profileSubCategories {
     height: 23.5em;
     right: 1em;
     transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
 }
 
-.headerItems .profileButton:focus + .profileSubCategories div,
-.headerItems .profileButton:focus + .profileSubCategories hr {
+.headerItems .profileButton:focus+.profileSubCategories div,
+.headerItems .profileButton:focus+.profileSubCategories hr {
     opacity: 1;
     transition: opacity 0.3s ease-out 1s;
 }
 
-/* Responsive Styles */
+
+/* ── Hide login button on login page ─────────────────────── */
+
+body.loginPage .headerItems .linkLoginBtn .loginButton {
+    display: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   (largest → smallest to avoid override clashes)
+   ============================================================ */
+
+
+/* ── ≥720px (large screens) ───────────────────────────────── */
+
+@media only screen and (min-width: 720px) {
+    #theme-toggle {
+        right: 25em;
+    }
+
+    .headerItems .cartButton {
+        right: 13em;
+    }
+
+    .headerItems .profileButton,
+    .headerItems .loginButton {
+        right: 1.5em;
+    }
+
+    body.loginPage .headerItems .cartButton {
+        right: 1.5em;
+    }
+
+    body.loginPage #theme-toggle {
+        right: 14em;
+    }
+}
+
+
+/* ── ≤1090px ──────────────────────────────────────────────── */
+
 @media only screen and (max-width: 1090px) {
     .headerContainer {
         height: 10em;
@@ -329,7 +392,14 @@
     .header svg {
         margin-left: 0;
     }
+
+    .profileSubCategories {
+        top: 10em;
+    }
 }
+
+
+/* ── ≤720px ───────────────────────────────────────────────── */
 
 @media only screen and (max-width: 720px) {
     #theme-toggle {
@@ -359,17 +429,24 @@
     }
 }
 
-@media only screen and (max-width: 1090px) {
-    .profileSubCategories {
-        top: 10em
-    }
-}
+
+/* ── ≤625px (mobile) ──────────────────────────────────────── */
+/*
+   profileSubCategories visibility is handled entirely by
+   JS inline styles in Header.js (menuOpen state).
+   No :focus rules here — they would fight the JS state.
+*/
 
 @media only screen and (max-width: 625px) {
     .headerContainer {
         height: 9em;
     }
 
+    .header svg {
+        margin-left: 0;
+    }
+
+    /* Shrink profile / login to circle */
     .headerItems .profileButton,
     .headerItems .loginButton {
         width: 4em;
@@ -383,41 +460,18 @@
         margin-top: -3.4em;
     }
 
+    /* Show the compact profile icon */
     .headerItems .profileButton svg:nth-child(3) {
         display: block;
     }
 
+    /* Hide text labels inside profileButton on mobile */
     .greetUser,
     .profileSettings {
         display: none;
     }
 
-    .profileSubCategories {
-        width: 100%;
-        right: -50em;
-        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
-    }
-
-    .headerItems .profileButton:focus + .profileSubCategories {
-        right: 0;
-        height: 27em;
-        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
-    }
-
-    .profileSubCategories .greetUser {
-        display: flex;
-        padding: 0.5em;
-        padding-bottom: 0;
-        font-size: 2em;
-        opacity: 0;
-        transition: opacity 0.2s ease-out;
-    }
-
-    .headerItems .profileButton:focus + .profileSubCategories .greetUser {
-        opacity: 1;
-        transition: opacity 0.2s ease-out 1s;
-    }
-
+    /* Shrink cart to circle */
     .headerItems .cartButton {
         width: 4em;
         height: 4em;
@@ -433,20 +487,49 @@
         margin-top: 3px;
         margin-left: 0;
     }
-}
 
-@media only screen and (max-width: 410px) {
-    #theme-toggle::after {
-        font-size: 0.7em;
+    /* Dropdown: full-width, JS controls height/opacity/visibility */
+    .profileSubCategories {
+        width: 100%;
+        right: 0;
+        /* Remove desktop right-slide transition — JS handles everything */
+        transition: height 0.4s ease, opacity 0.3s ease;
     }
 
+    /* Show greeting inside dropdown on mobile */
+    .profileSubCategories .greetUser {
+        display: flex;
+        padding: 0.5em;
+        padding-bottom: 0;
+        font-size: 2em;
+    }
+
+    /* Keep items always visible — JS controls the container */
+    .profileSubCategories div,
+    .profileSubCategories hr {
+        opacity: 1;
+        transition: none;
+    }
+}
+
+
+/* ── ≤410px ───────────────────────────────────────────────── */
+
+@media only screen and (max-width: 410px) {
     #theme-toggle {
         top: 1em;
         right: 0.5em;
         width: 30px;
         height: 30px;
     }
+
+    #theme-toggle::after {
+        font-size: 0.7em;
+    }
 }
+
+
+/* ── ≤350px ───────────────────────────────────────────────── */
 
 @media only screen and (max-width: 350px) {
 
@@ -478,55 +561,13 @@
         width: 3em;
         height: 3em;
     }
-
-    .profileSubCategories {
-        right: -50em;
-        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
-    }
-
-    .headerItems .profileButton:focus + .profileSubCategories {
-        right: 0em;
-        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
-    }
 }
+
+
+/* ── ≤280px ───────────────────────────────────────────────── */
 
 @media only screen and (max-width: 280px) {
-    .profileSubCategories {
-        right: -50em;
-        transition: right 0.5s ease-out 0.7s, height 0.5s ease-out 0.2s;
-    }
-
-    .headerItems .profileButton:focus + .profileSubCategories {
-        right: 0;
-        transition: right 0.5s ease-out, height 0.5s ease-out 0.5s;
-    }
-}
-
-/* Hide login button on login page */
-body.loginPage .headerItems .linkLoginBtn .loginButton {
-    display: none;
-}
-
-/* Large screen styles */
-@media only screen and (min-width: 720px) {
-    #theme-toggle {
-        right: 25em;
-    }
-
     .headerItems .cartButton {
-        right: 13em;
-    }
-
-    .headerItems .profileButton,
-    .headerItems .loginButton {
-        right: 1.5em;
-    }
-
-    body.loginPage .headerItems .cartButton {
-        right: 1.5em;
-    }
-
-    body.loginPage #theme-toggle {
-        right: 14em;
+        right: 4.5em;
     }
 }
