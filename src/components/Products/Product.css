@@ -164,8 +164,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    gap: .5em;
     height: 2.5em;
-    gap: 1em;
     padding: 0.5em;
     border-radius: 25px;
     background-color: var(--background-color);
@@ -174,17 +174,24 @@
 }
 
 .noOfItemsProduct button {
-    width: 2em;
+    width: 100%;
     height: 2em;
     border: none;
     outline: none;
     background-color: var(--background-color);
-    border-radius: 50%;
     cursor: pointer;
     transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.noOfItemsProduct button:nth-child(1) {
+    border-radius: 25px 0 0 25px;
+}
+
+.noOfItemsProduct button:nth-child(3) {
+    border-radius: 0 25px 25px 0;
 }
 
 .noOfItemsProduct button:active {
