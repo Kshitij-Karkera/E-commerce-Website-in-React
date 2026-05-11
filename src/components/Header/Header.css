@@ -229,7 +229,6 @@
 }
 
 .headerItems .loginButton svg {
-    z-index: 1;
     fill: var(--svg-color-foreground);
 }
 
