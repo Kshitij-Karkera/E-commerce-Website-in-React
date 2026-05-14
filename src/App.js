@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
 import { useEffect } from 'react';
 import { auth } from './firebaseHandler';
-import Loader from './components/Loader/Loader';
+import EpicLoader from './components/Loader/Loader';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
@@ -34,10 +35,10 @@ function App() {
 
   return (
     <Router>
-      <Suspense fallback={<Loader fullPage />}>
+      <ScrollToTop />
+      <Suspense fallback={<EpicLoader fullPage />}>
         <Header />
-
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<EpicLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -50,7 +51,6 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
-
         <Footer />
       </Suspense>
     </Router>
