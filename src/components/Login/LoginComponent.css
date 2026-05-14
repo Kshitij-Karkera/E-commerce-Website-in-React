@@ -1,61 +1,70 @@
-:root {
-    --valid: lime;
-    --focus: yellow;
+/* ============================================================
+   LoginComponent.css
+   Animation classes (bounceLeft/Right/LeftSmall/RightSmall)
+   are applied by React state in LoginComponent.js.
+   No raw DOM classList/style manipulation anywhere.
+   ============================================================ */
+
+
+/* ── Form validation colors ───────────────────────────────── */
+/*
+   All rules scoped under .loginContainer so they don't clash
+   with the identical unscoped rules in YourAccount.css.
+*/
+
+.loginContainer {
+    --valid:   lime;
+    --focus:   yellow;
     --invalid: red;
 }
 
-input {
+.loginContainer .forms_field input {
     border: 3px solid var(--color, transparent);
 }
 
-.forms_field:has(:invalid) {
+.loginContainer .forms_field:has(:invalid) {
     --color: var(--invalid);
 }
 
-.forms_field:has(:invalid:not(:focus)) {
+.loginContainer .forms_field:has(:invalid:not(:focus)) {
     animation: shake .7s ease;
 }
 
-.forms_field:has(:focus) {
+.loginContainer .forms_field:has(:focus) {
     --color: var(--focus);
 }
 
-.forms_field:has(:valid) {
+.loginContainer .forms_field:has(:valid) {
     --color: var(--valid);
 }
 
-.forms_field:has(:placeholder-shown) {
+.loginContainer .forms_field:has(:placeholder-shown) {
     --color: transparent;
 }
 
-.forms_field:has(:placeholder-shown:not(:focus)) {
+.loginContainer .forms_field:has(:placeholder-shown:not(:focus)) {
     animation: none;
 }
 
-form:valid .forms_buttons-action {
+.loginContainer form:valid .forms_buttons-action {
     cursor: pointer;
     --foreground-color: rgb(0, 149, 255);
     color: var(--upper-box-shadow-foreground);
 }
 
-form:valid .forms_buttons-action:hover {
-    box-shadow: 1px 1px 10px rgb(0, 95, 162) inset,
+.loginContainer form:valid .forms_buttons-action:hover {
+    box-shadow:  1px  1px 10px rgb(0, 95, 162) inset,
                 -1px -1px 10px rgb(0, 95, 162) inset;
 }
 
 @keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    20%, 40%, 60%, 80% {
-        transform: translateX(-2%);
-    }
-
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateX(2%);
-    }
+    0%, 100%                { transform: translateX(0);   }
+    20%, 40%, 60%, 80%      { transform: translateX(-2%); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(2%);  }
 }
+
+
+/* ── Base input / button resets ───────────────────────────── */
 
 .loginContainer button {
     background-color: transparent;
@@ -75,30 +84,20 @@ form:valid .forms_buttons-action:hover {
     cursor: pointer;
 }
 
-.loginContainer input::-moz-placeholder {
-    letter-spacing: 0.1rem;
-}
+.loginContainer input::placeholder          { letter-spacing: 0.1rem; }
+.loginContainer input::-moz-placeholder     { letter-spacing: 0.1rem; }
+.loginContainer input:-ms-input-placeholder { letter-spacing: 0.1rem; }
 
-.loginContainer input:-ms-input-placeholder {
-    letter-spacing: 0.1rem;
-}
 
-.loginContainer input::placeholder {
-    letter-spacing: 0.1rem;
-}
+/* ── Container ────────────────────────────────────────────── */
 
-.loginContainer .user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-}
 .loginContainer .user_options-container {
     position: relative;
     width: 80%;
 }
+
+
+/* ── Desktop side panel ───────────────────────────────────── */
 
 .loginContainer .user_options-text {
     display: flex;
@@ -107,7 +106,7 @@ form:valid .forms_buttons-action:hover {
     background-color: var(--background-color);
     border-radius: 10px;
     box-shadow: -10px -10px 20px var(--upper-box-shadow-foreground) inset,
-                10px 10px 20px var(--lower-box-shadow-foreground) inset;
+                 10px  10px 20px var(--lower-box-shadow-foreground) inset;
 }
 
 .loginContainer .user_options-registered,
@@ -139,13 +138,17 @@ form:valid .forms_buttons-action:hover {
     letter-spacing: 0.2rem;
     transition: 0.2s ease-in-out;
 }
+
 .loginContainer .user_registered-login:hover,
 .loginContainer .user_unregistered-signup:hover {
     border: 1px solid rgb(0, 149, 255);
     color: rgb(0, 149, 255);
     box-shadow: -3px -3px 10px var(--upper-box-shadow-foreground) inset,
-                3px 3px 10px var(--lower-box-shadow-foreground) inset;
+                 3px  3px 10px var(--lower-box-shadow-foreground) inset;
 }
+
+
+/* ── Form card ────────────────────────────────────────────── */
 
 .loginContainer fieldset {
     border: none;
@@ -163,14 +166,15 @@ form:valid .forms_buttons-action:hover {
     background-color: var(--background-color);
     border-radius: 10px;
     box-shadow: -10px -10px 20px var(--upper-box-shadow-foreground),
-                10px 10px 20px var(--lower-box-shadow-foreground);
+                 10px  10px 20px var(--lower-box-shadow-foreground);
     overflow: hidden;
     transform: translate3d(100%, -50%, 0);
     transition: transform 0.4s ease-in-out;
 }
-.loginContainer .user_options-forms .user_forms-login {
-    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-}
+
+
+/* ── Forms inside the card ────────────────────────────────── */
+
 .loginContainer .user_options-forms .forms_title {
     margin-bottom: 45px;
     line-height: 1em;
@@ -178,9 +182,11 @@ form:valid .forms_buttons-action:hover {
     color: rgb(0, 149, 255);
     letter-spacing: 0.1rem;
 }
+
 .loginContainer .user_options-forms .forms_field:not(:last-of-type) {
     margin-bottom: 20px;
 }
+
 .loginContainer .user_options-forms .forms_field-input {
     width: 100%;
     height: 3em;
@@ -188,7 +194,7 @@ form:valid .forms_buttons-action:hover {
     border-radius: 3em;
     background-color: var(--background-color);
     box-shadow: -3px -3px 5px var(--upper-box-shadow-foreground) inset,
-                3px 3px 5px var(--lower-box-shadow-foreground) inset;
+                 3px  3px 5px var(--lower-box-shadow-foreground) inset;
     color: rgb(0, 149, 255);
     padding: 0 1.5em;
     transition: border-color 0.2s ease-in-out;
@@ -200,14 +206,17 @@ form:valid .forms_buttons-action:hover {
     align-items: center;
     margin-top: 35px;
 }
+
 .loginContainer .user_options-forms .forms_buttons-forgot {
     letter-spacing: 0.1rem;
     text-decoration: underline;
     transition: 0.2s ease-in-out;
 }
+
 .loginContainer .user_options-forms .forms_buttons-forgot:hover {
     color: rgb(0, 149, 255);
 }
+
 .loginContainer .user_options-forms .forms_buttons-action {
     background-color: var(--foreground-color);
     color: var(--upper-box-shadow-foreground);
@@ -215,65 +224,94 @@ form:valid .forms_buttons-action:hover {
     border-radius: 5px;
     padding: 10px 35px;
     margin-left: 10px;
+    margin-top: -1em;
+    margin-right: 1em;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     transition: 0.2s ease-in-out;
 }
 
-.loginContainer .user_options-forms .forms_buttons-action {
-    margin-top: -1em; 
-    margin-right: 1em;
-}
-
-.loginContainer .user_options-forms .user_forms-signup,
-.loginContainer .user_options-forms .user_forms-login {
+.loginContainer .user_options-forms .user_forms-login,
+.loginContainer .user_options-forms .user_forms-signup {
     position: absolute;
     top: 70px;
     left: 40px;
     width: calc(100% - 80px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
+    transition: opacity 0.4s ease-in-out,
+                visibility 0.4s ease-in-out,
+                transform 0.5s ease-in-out;
 }
-.loginContainer .user_options-forms .user_forms-signup {
-    transform: translate3d(120px, 0, 0);
-}
-.loginContainer .user_options-forms .user_forms-signup .forms_buttons {
-    justify-content: flex-end;
-}
+
+/* Login form visible by default */
+/* Login form visible by default */
 .loginContainer .user_options-forms .user_forms-login {
     transform: translate3d(0, 0, 0);
     opacity: 1;
     visibility: visible;
 }
 
+.loginContainer .user_options-forms .user_forms-signup {
+    transform: translate3d(120px, 0, 0);
+}
+
+/* Ensure login form resets correctly when bounceRight replays */
+.loginContainer .user_options-forms:not(.bounceLeft):not(.bounceLeftSmall) .user_forms-login {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+}
+
+.loginContainer .user_options-forms .user_forms-signup .forms_buttons {
+    justify-content: flex-end;
+}
+
+
+/* ── Desktop animation classes (applied by React state) ───── */
+
 .loginContainer .user_options-forms.bounceLeft {
-    -webkit-animation: bounceLeft 1s forwards;
-            animation: bounceLeft 1s forwards;
+    animation: bounceLeft 1s forwards;
 }
+
 .loginContainer .user_options-forms.bounceLeft .user_forms-signup {
-    -webkit-animation: showSignUp 1s forwards;
-            animation: showSignUp 1s forwards;
+    animation: showSignUp 1s forwards;
 }
+
 .loginContainer .user_options-forms.bounceLeft .user_forms-login {
     opacity: 0;
     visibility: hidden;
     transform: translate3d(-120px, 0, 0);
 }
+
 .loginContainer .user_options-forms.bounceRight {
-    -webkit-animation: bounceRight 1s forwards;
-            animation: bounceRight 1s forwards;
+    animation: bounceRight 1s forwards;
 }
-.loginContainer .user_unregistered-signup:nth-child(1),
-.loginContainer .user_registered-login:nth-child(1) {
-    display: none;
+
+.loginContainer .user_options-forms.bounceRight .user_forms-login {
+    animation: showLogin 1s forwards;
 }
+
+.loginContainer .user_options-forms.bounceRight .user_forms-signup {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(120px, 0, 0);
+}
+
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+
+/* ── ≤990px ───────────────────────────────────────────────── */
 
 @media screen and (max-width: 990px) {
     .loginContainer .user_options-forms .user_forms-signup,
     .loginContainer .user_options-forms .user_forms-login {
         top: 40px;
     }
+
     .loginContainer .forms_buttons {
         flex-direction: column;
     }
@@ -288,11 +326,20 @@ form:valid .forms_buttons-action:hover {
 
     .loginContainer .user_options-registered,
     .loginContainer .user_options-unregistered {
-    padding: 50px 45px;
+        padding: 50px 45px;
     }
 }
 
+
+/* ── ≤708px (mobile) ──────────────────────────────────────── */
+/*
+   Side panel hidden. Mobile toggle buttons are rendered by
+   React (conditionally, one at a time) — no CSS nth-child
+   hiding needed here.
+*/
+
 @media screen and (max-width: 708px) {
+    /* Form card: centred, full-width */
     .loginContainer .user_options-forms {
         min-width: 255px;
         width: 110%;
@@ -306,29 +353,27 @@ form:valid .forms_buttons-action:hover {
         height: 420px;
     }
 
+    /* Hide desktop side panel */
     .loginContainer .user_options-text {
         display: none;
     }
 
+    /* Mobile toggle buttons: sit above the form card */
     .loginContainer .user_unregistered-signup,
     .loginContainer .user_registered-login {
         position: absolute;
         top: 13em;
     }
 
-    .loginContainer .user_unregistered-signup:nth-child(1),
-    .loginContainer .user_registered-login:nth-child(1) {
-        display: block;
-    }
-    
+    /* Mobile animation classes (applied by React state) */
     .loginContainer .user_options-forms.bounceLeftSmall {
-        -webkit-animation: bounceLeftSmall 1s forwards;
         animation: bounceLeftSmall 1s forwards;
     }
+
     .loginContainer .user_options-forms.bounceLeftSmall .user_forms-signup {
-        -webkit-animation: showSignUp 1s forwards;
         animation: showSignUp 1s forwards;
     }
+
     .loginContainer .user_options-forms.bounceLeftSmall .user_forms-login {
         opacity: 0;
         visibility: hidden;
@@ -336,114 +381,65 @@ form:valid .forms_buttons-action:hover {
     }
 
     .loginContainer .user_options-forms.bounceRightSmall {
-        -webkit-animation: bounceRightSmall 1s forwards;
         animation: bounceRightSmall 1s forwards;
     }
+
+        .loginContainer .user_options-forms.bounceRightSmall .user_forms-login {
+            animation: showLogin 1s forwards;
+        }
+
+    .loginContainer .user_options-forms.bounceRightSmall .user_forms-signup {
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(120px, 0, 0);
+    }
 }
 
-@-webkit-keyframes bounceLeft {
-    0% {
-    transform: translate3d(100%, -50%, 0);
-    }
-    50% {
-    transform: translate3d(-30px, -50%, 0);
-    }
-    100% {
-    transform: translate3d(0, -50%, 0);
-    }
-}
+
+/* ── Keyframes ────────────────────────────────────────────── */
+
 @keyframes bounceLeft {
-    0% {
-    transform: translate3d(100%, -50%, 0);
-    }
-    50% {
-    transform: translate3d(-30px, -50%, 0);
-    }
-    100% {
-    transform: translate3d(0, -50%, 0);
-    }
+    0%   { transform: translate3d(100%, -50%, 0);   }
+    50%  { transform: translate3d(-30px, -50%, 0);  }
+    100% { transform: translate3d(0, -50%, 0);      }
 }
 
-@-webkit-keyframes bounceRight {
-    0% {
-    transform: translate3d(0, -50%, 0);
-    }
-    50% {
-    transform: translate3d(calc(100% + 30px), -50%, 0);
-    }
-    100% {
-    transform: translate3d(100%, -50%, 0);
-    }
-}
 @keyframes bounceRight {
-    0% {
-    transform: translate3d(0, -50%, 0);
-    }
-    50% {
-    transform: translate3d(calc(100% + 30px), -50%, 0);
-    }
-    100% {
-    transform: translate3d(100%, -50%, 0);
-    }
+    0%   { transform: translate3d(0, -50%, 0);              }
+    50%  { transform: translate3d(calc(100% + 30px), -50%, 0); }
+    100% { transform: translate3d(100%, -50%, 0);            }
 }
 
-@-webkit-keyframes showSignUp {
-    100% {
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(0, 0, 0);
-    }
-}
 @keyframes showSignUp {
     100% {
-    opacity: 1;
-    visibility: visible;
-    transform: translate3d(0, 0, 0);
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
     }
 }
 
-@-webkit-keyframes bounceLeftSmall {
+@keyframes showLogin {
     0% {
-    transform: translate3d(100%, -50%, 0);
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(-120px, 0, 0);
     }
-    50% {
-    transform: translate3d(-70%, -50%, 0);
-    }
+
     100% {
-    transform: translate3d(0, -50%, 0);
+        opacity: 1;
+        visibility: visible;
+        transform: translate3d(0, 0, 0);
     }
 }
+
 @keyframes bounceLeftSmall {
-    0% {
-    transform: translate3d(100%, -50%, 0);
-    }
-    50% {
-    transform: translate3d(-70%, -50%, 0);
-    }
-    100% {
-    transform: translate3d(-50%, -50%, 0);
-    }
+    0%   { transform: translate3d(100%, -50%, 0);  }
+    50%  { transform: translate3d(-70%, -50%, 0);  }
+    100% { transform: translate3d(-50%, -50%, 0);  }
 }
 
-@-webkit-keyframes bounceRightSmall {
-    0% {
-    transform: translate3d(-200%, -50%, 0);
-    }
-    50% {
-    transform: translate3d(-30%, -50%, 0);
-    }
-    100% {
-    transform: translate3d(-50%, -50%, 0);
-    }
-}
 @keyframes bounceRightSmall {
-    0% {
-    transform: translate3d(-200%, -50%, 0);
-    }
-    50% {
-    transform: translate3d(-30%, -50%, 0);
-    }
-    100% {
-    transform: translate3d(-50%, -50%, 0);
-    }
+    0%   { transform: translate3d(-200%, -50%, 0); }
+    50%  { transform: translate3d(-30%,  -50%, 0); }
+    100% { transform: translate3d(-50%,  -50%, 0); }
 }
