@@ -25,21 +25,17 @@ function SearchDetails() {
   const sortByOptions = ['All', 'Featured', 'Price: Low to High', 'Price: High to Low', 'Newest Arrivals'];
   const ratingOptions = [5, 4, 3, 2, 1];
 
-  // Toggle filter visibility on mobile
   const toggleFilter = () => {
     if (isMobileView) {
       if (isFilterOpen) {
-        // Start closing animation
         setIsFilterOpen(false);
       } else {
-        // Open filter immediately
         setIsFilterOpen(true);
         setIsFilterVisible(true);
       }
     }
   };
 
-  // Handle animation end to hide filter after closing
   useEffect(() => {
     const filterElement = filterRef.current;
     if (!filterElement) return;
@@ -56,7 +52,6 @@ function SearchDetails() {
     };
   }, [isMobileView, isFilterOpen]);
 
-  // Handle click outside to close filter in mobile view
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMobileView && filterRef.current && !filterRef.current.contains(event.target)) {
@@ -69,7 +64,6 @@ function SearchDetails() {
     };
   }, [isMobileView]);
 
-  // Handle window resize to update filter visibility and view mode
   useEffect(() => {
     const handleResize = () => {
       const isNowMobile = window.innerWidth <= 1090;
@@ -83,7 +77,6 @@ function SearchDetails() {
     };
   }, []);
 
-  // Handle brand checkbox changes
   const handleBrandChange = (e) => {
     const value = e.target.value;
     setChecked(prev =>
@@ -91,7 +84,6 @@ function SearchDetails() {
     );
   };
 
-  // Handle rating checkbox changes
   const handleRatingChange = (e) => {
     const value = Number(e.target.value);
     setRatingButton(prev =>
@@ -99,17 +91,14 @@ function SearchDetails() {
     );
   };
 
-  // Handle sort option change
   const handleSortChange = (e) => {
     setSort(e.target.value);
   };
 
-  // Handle range slider change
   const handleRangeChange = (e) => {
     setRangeValue(Number(e.target.value));
   };
 
-  // Compute unique brands
   const uniqueBrands = useMemo(() => {
     const brands = productDetails
       .filter(product => product.category === pathName)
@@ -118,7 +107,6 @@ function SearchDetails() {
     return brands.sort();
   }, [productDetails, pathName]);
 
-  // Compute min and max prices
   const { minPrice, maxPrice } = useMemo(() => {
     const prices = productDetails
       .filter(product =>
@@ -132,22 +120,18 @@ function SearchDetails() {
     };
   }, [productDetails, pathName]);
 
-  // Initialize rangeValue
   useEffect(() => {
     setRangeValue(maxPrice + 1000);
   }, [maxPrice]);
 
-  // Compute filtered and sorted products
   const filteredProducts = useMemo(() => {
     let products = [...productDetails];
 
-    // Filter by category or brand
     products = products.filter(product =>
       product.category === pathName ||
       `${product.brand.brandName} ${product.brand.subBrand}` === pathName
     );
 
-    // Apply sort
     products = products.sort((a, b) => {
       if (sort === 'Featured') return a.featured === 'yes' ? -1 : 1;
       if (sort === 'Price: Low to High') return a.price - b.price;
@@ -156,23 +140,19 @@ function SearchDetails() {
       return a.title.localeCompare(b.title);
     });
 
-    // Apply brand filter
     if (checked.length > 0) {
       products = products.filter(product => checked.includes(product.brand.brandName));
     }
 
-    // Apply rating filter
     if (ratingButton.length > 0) {
       products = products.filter(product => ratingButton.includes(product.rating));
     }
 
-    // Apply price range filter
     products = products.filter(product => product.price <= rangeValue);
 
     return products;
   }, [productDetails, pathName, sort, checked, ratingButton, rangeValue]);
 
-  // Compute range ticks
   const rangeTicks = useMemo(() => {
     const ticks = [];
     const delta = (maxPrice - minPrice) / 19;
