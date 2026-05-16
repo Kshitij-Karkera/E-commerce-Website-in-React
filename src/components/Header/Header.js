@@ -20,19 +20,16 @@ function Header() {
 
   const isMobile = windowWidth <= 625;
 
-  // ── Window resize ──────────────────────────────────────────
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // ── Close menu on route change ─────────────────────────────
   useEffect(() => {
     setMenuOpen(false);
   }, [location]);
 
-  // ── Restore header/footer visibility (hidden by PageNotFound) 
   useEffect(() => {
     const header = document.querySelector('.headerContainer');
     const footer = document.querySelector('.footerItems');
@@ -40,7 +37,6 @@ function Header() {
     if (footer) footer.style.display = 'flex';
   }, [location]);
 
-  // ── Close mobile menu on outside click/touch ───────────────
   useEffect(() => {
     if (!isMobile) return;
 
@@ -63,7 +59,6 @@ function Header() {
     };
   }, [isMobile]);
 
-  // ── Theme toggle ───────────────────────────────────────────
   useEffect(() => {
     const themeToggle = document.querySelector('#theme-toggle');
     if (!themeToggle) return;
@@ -94,7 +89,6 @@ function Header() {
     return () => themeToggle.removeEventListener('click', handleThemeToggle);
   }, []);
 
-  // ── Handlers ───────────────────────────────────────────────
   const handleProfileClick = () => {
     if (isMobile) setMenuOpen(prev => !prev);
   };
@@ -109,9 +103,6 @@ function Header() {
     }
   };
 
-  // ── Mobile dropdown inline styles ──────────────────────────
-  // On desktop this object is empty — CSS :focus rules take over.
-  // On mobile JS owns all visibility so there's no fight with CSS.
   const mobileDropdownStyle = isMobile
     ? {
       right: 0,
@@ -126,7 +117,6 @@ function Header() {
     }
     : {};
 
-  // ── Render ─────────────────────────────────────────────────
   return (
     <HeaderContainer className="headerContainer">
 
@@ -139,7 +129,6 @@ function Header() {
       <HeaderItems className="headerItems">
         <SearchBar />
 
-        {/* Cart */}
         <Link to="/cart" className="linkCartBtn">
           <button className="cartButton">
             <div
@@ -155,14 +144,8 @@ function Header() {
           </button>
         </Link>
 
-        {/* Profile or Login */}
         {user ? (
           <>
-            {/*
-              profileButton and profileSubCategories are kept as direct
-              siblings so the desktop CSS :focus + .profileSubCategories
-              selector continues to work without any wrapper div.
-            */}
             <button
               className="profileButton"
               ref={profileBtnRef}
@@ -233,7 +216,6 @@ function Header() {
           </Link>
         )}
 
-        {/* Theme toggle */}
         <button id="theme-toggle" aria-label="Switch to Dark Theme">
           <ThemeToggleIcon />
         </button>
@@ -246,7 +228,6 @@ function Header() {
 export default Header;
 
 
-/* ── Styled components (layout only, no overrides) ─────────── */
 
 const HeaderContainer = styled.div``;
 
